@@ -2324,22 +2324,13 @@
                 <div style="font-size:11px;color:var(--text);">${r.name}</div>
                 <div style="font-size:10px;color:var(--muted);">${r.date}</div>
               </div>
-              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
-                <div style="text-align:center;">
-                  <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:2px;">MILES</div>
-                  <div style="font-size:13px;color:var(--accent);font-weight:600;">${r.miles}</div>
+            <div style="text-align:center;">
+                  <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:2px;">TIME</div>
+                  <div style="font-size:13px;color:var(--text);">${r.totalTime || '—'}</div>
                 </div>
                 <div style="text-align:center;">
-                  <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:2px;">PACE</div>
-                  <div style="font-size:13px;color:var(--text);">${r.pace}</div>
-                </div>
-                <div style="text-align:center;">
-                  <div style="text-align:center;"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:2px;">TIME</div><div style="font-size:13px;color:var(--text);">${r.totalTime || '—'}</div></div><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:2px;">AVG HR</div>
-                  <div style="font-size:13px;color:${r.avgHR ? (r.avgHR < 136 ? '#4a90d9' : r.avgHR < 151 ? '#34d399' : r.avgHR < 165 ? '#f59e0b' : '#FC4C02') : 'var(--muted)'};">${r.avgHR ? r.avgHR + ' bpm' : 'â€”'}</div>
-                </div>
-                <div style="text-align:center;">
-                  <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:2px;">ZONE</div>
-                  <div style="font-size:13px;color:${r.zoneColor || 'var(--muted)'};">${r.zone || 'â€”'}</div>
+                  <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:2px;">AVG HR</div>
+                  <div style="font-size:13px;color:${r.avgHR ? (r.avgHR < 136 ? '#4a90d9' : r.avgHR < 151 ? '#34d399' : r.avgHR < 165 ? '#f59e0b' : '#FC4C02') : 'var(--muted)'};">${r.avgHR ? r.avgHR + ' bpm' : '—'}</div>
                 </div>
               </div>
             </div>
