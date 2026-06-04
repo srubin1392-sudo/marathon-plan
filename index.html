@@ -3041,7 +3041,6 @@
     // Add drag handle to each row
     rows.forEach((row, i) => {
       row.dataset.idx = i;
-      row.style.touchAction = 'none';
 
       const handle = document.createElement('div');
       handle.className = 'drag-handle';
