@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0a0a">
+<title>The Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1c1c1c;
+    --border: rgba(255,255,255,0.08);
+    --text: #f0f0f0;
+    --muted: #666;
+    --muted2: #999;
+    --politics: #a855f7;
+    --world: #3b82f6;
+    --sports: #22c55e;
+    --local: #f97316;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: env(safe-area-inset-top, 0px) 0 0;
+  }
+
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 16px 20px 12px;
+  }
+
+  .brand-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .brand-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  .refresh-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted2);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+  }
+  .refresh-btn:active { opacity: 0.5; }
+  .refresh-btn.spinning { animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    padding: 0 20px 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab {
+    flex-shrink: 0;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: none;
+    transition: all 0.15s;
+  }
+  .tab:active { opacity: 0.6; }
+  .tab.active                   { color: var(--text);     background: var(--surface2); border-color: rgba(255,255,255,0.15); }
+  .tab[data-cat="politics"].active { color: var(--politics); background: rgba(168,85,247,0.12); border-color: rgba(168,85,247,0.3); }
+  .tab[data-cat="world"].active    { color: var(--world);    background: rgba(59,130,246,0.12);  border-color: rgba(59,130,246,0.3); }
+  .tab[data-cat="sports"].active   { color: var(--sports);   background: rgba(34,197,94,0.12);   border-color: rgba(34,197,94,0.3); }
+  .tab[data-cat="local"].active    { color: var(--local);    background: rgba(249,115,22,0.12);  border-color: rgba(249,115,22,0.3); }
+
+  /* ── CONTENT ── */
+  .content {
+    padding: 16px 16px 40px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 20px 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label:first-child { padding-top: 4px; }
+  .section-label-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .section-label[data-cat="politics"] .section-label-dot { background: var(--politics); }
+  .section-label[data-cat="world"]    .section-label-dot { background: var(--world); }
+  .section-label[data-cat="sports"]   .section-label-dot { background: var(--sports); }
+  .section-label[data-cat="local"]    .section-label-dot { background: var(--local); }
+
+  /* ── TOP STORY CARD ── */
+  .top-story {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .top-story:active { background: var(--surface2); }
+
+  .top-story-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    background: var(--surface2);
+  }
+
+  .top-story-body {
+    padding: 14px 16px;
+  }
+
+  .top-story-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .top-story-headline {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .top-story-summary {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted2);
+  }
+
+  /* ── STANDARD CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: stretch;
+    transition: background 0.12s;
+  }
+  .card:active { background: var(--surface2); }
+
+  .card-bar {
+    width: 3px;
+    flex-shrink: 0;
+  }
+  .card[data-cat="politics"] .card-bar { background: var(--politics); }
+  .card[data-cat="world"]    .card-bar { background: var(--world); }
+  .card[data-cat="sports"]   .card-bar { background: var(--sports); }
+  .card[data-cat="local"]    .card-bar { background: var(--local); }
+
+  .card-body {
+    padding: 11px 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 5px;
+  }
+
+  .cat-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+  .card[data-cat="politics"] .cat-pill { color: var(--politics); background: rgba(168,85,247,0.12); }
+  .card[data-cat="world"]    .cat-pill { color: var(--world);    background: rgba(59,130,246,0.12); }
+  .card[data-cat="sports"]   .cat-pill { color: var(--sports);   background: rgba(34,197,94,0.12); }
+  .card[data-cat="local"]    .cat-pill { color: var(--local);    background: rgba(249,115,22,0.12); }
+
+  .card-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .card-headline {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text);
+    margin-bottom: 4px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .card-summary {
+    font-size: 11px;
+    line-height: 1.55;
+    color: var(--muted2);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .card-thumb {
+    width: 72px;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+    background: var(--surface2);
+  }
+
+  /* ── SKELETON ── */
+  .skel-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+  .skel-line {
+    background: var(--surface2);
+    border-radius: 4px;
+    margin-bottom: 7px;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:0.35} 50%{opacity:0.7} }
+
+  /* ── EMPTY / ERROR ── */
+  .empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--muted);
+  }
+  .empty-state .icon { font-size: 36px; margin-bottom: 14px; }
+  .empty-state .msg { font-size: 13px; line-height: 1.6; }
+  .empty-state .retry-btn {
+    margin-top: 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted2);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  /* ── LAST UPDATED ── */
+  .last-updated {
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 24px 0 8px;
+  }
+
+  /* ── API KEY NOTICE ── */
+  .setup-notice {
+    background: rgba(168,85,247,0.08);
+    border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .setup-notice h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--politics);
+    margin-bottom: 8px;
+  }
+  .setup-notice p {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--muted2);
+  }
+  .setup-notice code {
+    background: var(--surface2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--politics);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <div class="brand-title">THE BRIEF</div>
+      <div class="brand-meta" id="header-date">Cobble Hill, Brooklyn</div>
+    </div>
+    <button class="refresh-btn" id="refresh-btn" onclick="loadNews(true)" title="Refresh">↻</button>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-cat="all"      onclick="setTab('all')">All</button>
+    <button class="tab"        data-cat="politics" onclick="setTab('politics')">Politics</button>
+    <button class="tab"        data-cat="world"    onclick="setTab('world')">World</button>
+    <button class="tab"        data-cat="sports"   onclick="setTab('sports')">Sports</button>
+    <button class="tab"        data-cat="local"    onclick="setTab('local')">Local NY</button>
+  </div>
+</div>
+
+<div class="content" id="content"></div>
+
+<script>
+  const CACHE_KEY  = 'brief_v1_data';
+  const CACHE_DATE = 'brief_v1_date';
+
+  let data = null;
+  let activeTab = 'all';
+
+  // ── DATE HEADER ──
+  function updateHeader() {
+    const d = new Date();
+    const days   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    document.getElementById('header-date').textContent =
+      `Cobble Hill, Brooklyn · ${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}`;
+  }
+  updateHeader();
+
+  // ── TIME AGO ──
+  function timeAgo(iso) {
+    const diff = Math.floor((Date.now() - new Date(iso)) / 1000);
+    if (diff < 60)    return 'Just now';
+    if (diff < 3600)  return `${Math.floor(diff / 60)}m ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+    const d = new Date(iso);
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${months[d.getMonth()]} ${d.getDate()}`;
+  }
+
+  // ── CATEGORY LABELS ──
+  const CAT_LABELS = { politics: 'Politics', world: 'World', sports: 'Sports', local: 'Local NY' };
+  const CAT_ICONS  = { politics: '🗳', world: '🌍', sports: '⚽', local: '🗽' };
+
+  // ── RENDER TOP STORY ──
+  function renderTopStory(a) {
+    const img = a.thumbnail
+      ? `<img class="top-story-img" src="${a.thumbnail}" alt="" loading="lazy" onerror="this.style.display='none'">`
+      : '';
+    const summary = a.summary
+      ? `<div class="top-story-summary">${a.summary.slice(0, 200)}${a.summary.length > 200 ? '…' : ''}</div>`
+      : '';
+    return `
+      <div class="top-story" data-cat="${a.category}" onclick="open('${esc(a.url)}', '_blank')">
+        ${img}
+        <div class="top-story-body">
+          <div class="top-story-meta">
+            <span class="cat-pill" style="
+              color: var(--${a.category});
+              background: rgba(${catRgb(a.category)},0.12);
+              font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;
+              text-transform:uppercase;padding:2px 7px;border-radius:3px;">
+              ${CAT_ICONS[a.category]} ${CAT_LABELS[a.category]}
+            </span>
+            <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-left:auto;">${timeAgo(a.time)}</span>
+          </div>
+          <div class="top-story-headline">${a.headline}</div>
+          ${summary}
+        </div>
+      </div>`;
+  }
+
+  // ── RENDER CARD ──
+  function renderCard(a) {
+    const summary = a.summary
+      ? `<div class="card-summary">${a.summary.slice(0, 120)}${a.summary.length > 120 ? '…' : ''}</div>`
+      : '';
+    const thumb = a.thumbnail
+      ? `<img class="card-thumb" src="${a.thumbnail}" alt="" loading="lazy" onerror="this.style.display='none'">`
+      : '';
+    return `
+      <div class="card" data-cat="${a.category}" onclick="open('${esc(a.url)}', '_blank')">
+        <div class="card-bar"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="cat-pill">${CAT_LABELS[a.category]}</span>
+            <span class="card-time">${timeAgo(a.time)}</span>
+          </div>
+          <div class="card-headline">${a.headline}</div>
+          ${summary}
+        </div>
+        ${thumb}
+      </div>`;
+  }
+
+  // ── SECTION BLOCK (for All tab) ──
+  function renderSection(cat, articles, max) {
+    if (!articles || !articles.length) return '';
+    const items = articles.slice(0, max);
+    return `
+      <div class="section-label" data-cat="${cat}">
+        <div class="section-label-dot"></div>
+        ${CAT_ICONS[cat]} ${CAT_LABELS[cat]}
+      </div>
+      ${items.map((a, i) => i === 0 && cat !== 'local' ? renderTopStory(a) : renderCard(a)).join('')}
+    `;
+  }
+
+  // ── RENDER FEED ──
+  function renderFeed() {
+    const el = document.getElementById('content');
+    if (!data) return;
+
+    if (activeTab === 'all') {
+      const topStory = data.all[0];
+      const rest = {
+        politics: data.politics.slice(0, 3),
+        world:    data.world.slice(0, 3),
+        sports:   data.sports.slice(0, 3),
+        local:    data.local.slice(0, 3)
+      };
+      let html = '';
+      if (topStory) {
+        html += `<div class="section-label" style="padding-top:4px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding-bottom:8px;">Top Story</div>`;
+        html += renderTopStory(topStory);
+      }
+      html += renderSection('politics', rest.politics, 3);
+      html += renderSection('world',    rest.world,    3);
+      html += renderSection('sports',   rest.sports,   3);
+      html += renderSection('local',    rest.local,    3);
+      html += renderLastUpdated();
+      el.innerHTML = html;
+    } else {
+      const articles = data[activeTab] || [];
+      if (!articles.length) {
+        el.innerHTML = emptyState();
+        return;
+      }
+      let html = articles.map((a, i) => i === 0 ? renderTopStory(a) : renderCard(a)).join('');
+      html += renderLastUpdated();
+      el.innerHTML = html;
+    }
+  }
+
+  function renderLastUpdated() {
+    try {
+      const d = localStorage.getItem(CACHE_DATE);
+      if (d) return `<div class="last-updated">Updated ${d === new Date().toDateString() ? 'today' : d} · The Guardian</div>`;
+    } catch(e) {}
+    return '<div class="last-updated">The Guardian</div>';
+  }
+
+  // ── SKELETON ──
+  function showSkeleton() {
+    const lines = (w, h=12) =>
+      `<div class="skel-line" style="width:${w};height:${h}px;"></div>`;
+    const card = `
+      <div class="skel-card">
+        <div style="display:flex;gap:6px;margin-bottom:8px;">
+          ${lines('50px',8)} ${lines('30px',8)}
+        </div>
+        ${lines('100%',14)} ${lines('80%',14)} ${lines('100%',10)} ${lines('70%',10)}
+      </div>`;
+    document.getElementById('content').innerHTML = Array(5).fill(card).join('');
+  }
+
+  // ── EMPTY / ERROR ──
+  function emptyState(msg = "No stories right now.<br>Try refreshing.") {
+    return `
+      <div class="empty-state">
+        <div class="icon">📭</div>
+        <div class="msg">${msg}</div>
+        <button class="retry-btn" onclick="loadNews(true)">↻ Refresh</button>
+      </div>`;
+  }
+
+  function setupNotice() {
+    return `
+      <div class="setup-notice">
+        <h3>Setup Required</h3>
+        <p>Add your Guardian API key to Netlify:<br><br>
+        1. Get a free key at <strong>open-platform.theguardian.com</strong><br>
+        2. In Netlify → Site settings → Environment variables<br>
+        3. Add <code>GUARDIAN_API_KEY</code> = your key<br>
+        4. Redeploy the site</p>
+      </div>`;
+  }
+
+  // ── TAB SWITCH ──
+  function setTab(cat) {
+    activeTab = cat;
+    document.querySelectorAll('.tab').forEach(t =>
+      t.classList.toggle('active', t.dataset.cat === cat));
+    if (data) {
+      renderFeed();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  // ── FETCH ──
+  async function loadNews(forceRefresh = false) {
+    if (!forceRefresh) {
+      try {
+        const cacheDate = localStorage.getItem(CACHE_DATE);
+        if (cacheDate === new Date().toDateString()) {
+          const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+          if (cached?.all?.length) {
+            data = cached;
+            renderFeed();
+            return;
+          }
+        }
+      } catch(e) {}
+    }
+
+    showSkeleton();
+    const btn = document.getElementById('refresh-btn');
+    btn.classList.add('spinning');
+
+    try {
+      const res = await fetch('/.netlify/functions/news-fetch');
+      const json = await res.json();
+
+      if (json.error) {
+        const isApiKey = json.error.includes('GUARDIAN_API_KEY');
+        document.getElementById('content').innerHTML =
+          isApiKey ? setupNotice() : emptyState(json.error);
+        return;
+      }
+
+      data = json;
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+        localStorage.setItem(CACHE_DATE, new Date().toDateString());
+      } catch(e) {}
+      renderFeed();
+    } catch(err) {
+      document.getElementById('content').innerHTML =
+        emptyState("Couldn't reach the server.<br>Check your connection.");
+    } finally {
+      btn.classList.remove('spinning');
+    }
+  }
+
+  // ── HELPERS ──
+  function esc(s) { return s.replace(/'/g, "\\'"); }
+  function catRgb(cat) {
+    return { politics: '168,85,247', world: '59,130,246', sports: '34,197,94', local: '249,115,22' }[cat] || '255,255,255';
+  }
+
+  loadNews();
+</script>
+</body>
+</html>
