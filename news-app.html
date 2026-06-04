@@ -162,6 +162,9 @@
     overflow: hidden;
     cursor: pointer;
     transition: background 0.12s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
   .top-story:active { background: var(--surface2); }
 
@@ -209,6 +212,8 @@
     display: flex;
     align-items: stretch;
     transition: background 0.12s;
+    text-decoration: none;
+    color: inherit;
   }
   .card:active { background: var(--surface2); }
 
@@ -255,26 +260,27 @@
     flex-shrink: 0;
   }
 
+  .source-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
   .card-headline {
     font-size: 13px;
     font-weight: 600;
     line-height: 1.4;
     color: var(--text);
     margin-bottom: 4px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
   }
 
   .card-summary {
-    font-size: 11px;
-    line-height: 1.55;
+    font-size: 12px;
+    line-height: 1.6;
     color: var(--muted2);
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
   }
 
   .card-thumb {
@@ -333,35 +339,6 @@
     padding: 24px 0 8px;
   }
 
-  /* ── API KEY NOTICE ── */
-  .setup-notice {
-    background: rgba(168,85,247,0.08);
-    border: 1px solid rgba(168,85,247,0.2);
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-  .setup-notice h3 {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--politics);
-    margin-bottom: 8px;
-  }
-  .setup-notice p {
-    font-size: 12px;
-    line-height: 1.6;
-    color: var(--muted2);
-  }
-  .setup-notice code {
-    background: var(--surface2);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--politics);
-  }
 </style>
 </head>
 <body>
@@ -386,8 +363,8 @@
 <div class="content" id="content"></div>
 
 <script>
-  const CACHE_KEY  = 'brief_v1_data';
-  const CACHE_DATE = 'brief_v1_date';
+  const CACHE_KEY  = 'brief_v4_data';
+  const CACHE_DATE = 'brief_v4_date';
 
   let data = null;
   let activeTab = 'all';
@@ -423,10 +400,10 @@
       ? `<img class="top-story-img" src="${a.thumbnail}" alt="" loading="lazy" onerror="this.style.display='none'">`
       : '';
     const summary = a.summary
-      ? `<div class="top-story-summary">${a.summary.slice(0, 200)}${a.summary.length > 200 ? '…' : ''}</div>`
+      ? `<div class="top-story-summary">${a.summary}</div>`
       : '';
     return `
-      <div class="top-story" data-cat="${a.category}" onclick="open('${esc(a.url)}', '_blank')">
+      <a class="top-story" data-cat="${a.category}" href="${escUrl(a.url)}" target="_blank" rel="noopener noreferrer">
         ${img}
         <div class="top-story-body">
           <div class="top-story-meta">
@@ -437,35 +414,37 @@
               text-transform:uppercase;padding:2px 7px;border-radius:3px;">
               ${CAT_ICONS[a.category]} ${CAT_LABELS[a.category]}
             </span>
+            ${srcTag(a)}
             <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-left:auto;">${timeAgo(a.time)}</span>
           </div>
           <div class="top-story-headline">${a.headline}</div>
           ${summary}
         </div>
-      </div>`;
+      </a>`;
   }
 
   // ── RENDER CARD ──
   function renderCard(a) {
     const summary = a.summary
-      ? `<div class="card-summary">${a.summary.slice(0, 120)}${a.summary.length > 120 ? '…' : ''}</div>`
+      ? `<div class="card-summary">${a.summary}</div>`
       : '';
     const thumb = a.thumbnail
       ? `<img class="card-thumb" src="${a.thumbnail}" alt="" loading="lazy" onerror="this.style.display='none'">`
       : '';
     return `
-      <div class="card" data-cat="${a.category}" onclick="open('${esc(a.url)}', '_blank')">
+      <a class="card" data-cat="${a.category}" href="${escUrl(a.url)}" target="_blank" rel="noopener noreferrer">
         <div class="card-bar"></div>
         <div class="card-body">
           <div class="card-meta">
             <span class="cat-pill">${CAT_LABELS[a.category]}</span>
+            ${srcTag(a)}
             <span class="card-time">${timeAgo(a.time)}</span>
           </div>
           <div class="card-headline">${a.headline}</div>
           ${summary}
         </div>
         ${thumb}
-      </div>`;
+      </a>`;
   }
 
   // ── SECTION BLOCK (for All tab) ──
@@ -520,9 +499,9 @@
   function renderLastUpdated() {
     try {
       const d = localStorage.getItem(CACHE_DATE);
-      if (d) return `<div class="last-updated">Updated ${d === new Date().toDateString() ? 'today' : d} · The Guardian</div>`;
+      if (d) return `<div class="last-updated">Updated ${d === new Date().toDateString() ? 'today' : d} · AP · CNN · ESPN · BBC · more</div>`;
     } catch(e) {}
-    return '<div class="last-updated">The Guardian</div>';
+    return '<div class="last-updated">AP · CNN · ESPN · BBC · more</div>';
   }
 
   // ── SKELETON ──
@@ -546,18 +525,6 @@
         <div class="icon">📭</div>
         <div class="msg">${msg}</div>
         <button class="retry-btn" onclick="loadNews(true)">↻ Refresh</button>
-      </div>`;
-  }
-
-  function setupNotice() {
-    return `
-      <div class="setup-notice">
-        <h3>Setup Required</h3>
-        <p>Add your Guardian API key to Netlify:<br><br>
-        1. Get a free key at <strong>open-platform.theguardian.com</strong><br>
-        2. In Netlify → Site settings → Environment variables<br>
-        3. Add <code>GUARDIAN_API_KEY</code> = your key<br>
-        4. Redeploy the site</p>
       </div>`;
   }
 
@@ -597,9 +564,7 @@
       const json = await res.json();
 
       if (json.error) {
-        const isApiKey = json.error.includes('GUARDIAN_API_KEY');
-        document.getElementById('content').innerHTML =
-          isApiKey ? setupNotice() : emptyState(json.error);
+        document.getElementById('content').innerHTML = emptyState(json.error);
         return;
       }
 
@@ -618,7 +583,26 @@
   }
 
   // ── HELPERS ──
-  function esc(s) { return s.replace(/'/g, "\\'"); }
+  function srcTag(a) {
+    const list = a.sources || (a.source ? [a.source] : []);
+    if (!list.length) return '';
+    const label = list.slice(0, 3).join(' · ') + (list.length > 3 ? ` +${list.length - 3}` : '');
+    return `<span class="source-tag">${label}</span>`;
+  }
+
+  function escUrl(s) {
+    if (!s) return '#';
+    return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+  }
+
+  // ── ARTICLE CLICK (belt-and-suspenders for iOS PWA + popup blockers) ──
+  document.getElementById('content').addEventListener('click', function(e) {
+    const a = e.target.closest('a[href]');
+    if (!a || !a.href.startsWith('http')) return;
+    e.preventDefault();
+    const w = window.open(a.href, '_blank', 'noopener,noreferrer');
+    if (!w || w.closed) window.location.href = a.href;
+  });
   function catRgb(cat) {
     return { politics: '168,85,247', world: '59,130,246', sports: '34,197,94', local: '249,115,22' }[cat] || '255,255,255';
   }

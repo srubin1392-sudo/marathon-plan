@@ -1,15 +1,85 @@
+functionsDirectory = "C:\\marathon-plan\\netlify\\functions"
+functionsDirectoryOrigin = "config-v1"
+headersOrigin = "config"
+redirectsOrigin = "config"
+plugins = []
+
 [build]
-  functions = "netlify/functions"
+publish = "C:\\marathon-plan"
+publishOrigin = "config"
+functions = "C:\\marathon-plan\\netlify\\functions"
 
-[dev]
-  port = 8888
+  [build.environment]
+
+  [build.processing]
+
+    [build.processing.css]
+
+    [build.processing.html]
+
+    [build.processing.images]
+
+    [build.processing.js]
+
+  [build.services]
+
+[functions]
+
+  [functions."*"]
+
+  [functions."news-fetch"]
+    timeout = 26
+
+[[headers]]
+for = "/sw.js"
+
+  [headers.values]
+  Cache-Control = "no-cache"
 
 [[redirects]]
-  from = "/auth/strava"
-  to = "/.netlify/functions/strava-auth"
-  status = 200
+from = "/auth/strava"
+to = "/.netlify/functions/strava-auth"
+status = 200
+force = false
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
 
 [[redirects]]
-  from = "/sync/strava"
-  to = "/.netlify/functions/strava-sync"
-  status = 200
+from = "/sync/strava"
+to = "/.netlify/functions/strava-sync"
+status = 200
+force = false
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
+
+[[redirects]]
+from = "/ai/debrief"
+to = "/.netlify/functions/ai-debrief"
+status = 200
+force = false
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
+
+[[redirects]]
+from = "/ai/coach"
+to = "/.netlify/functions/ai-coach"
+status = 200
+force = false
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
