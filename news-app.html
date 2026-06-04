@@ -283,6 +283,14 @@
     color: var(--muted2);
   }
 
+  .read-more {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--muted2);
+    margin-top: 8px;
+  }
+
   .card-thumb {
     width: 72px;
     object-fit: cover;
@@ -400,8 +408,8 @@
       ? `<img class="top-story-img" src="${a.thumbnail}" alt="" loading="lazy" onerror="this.style.display='none'">`
       : '';
     const summary = a.summary
-      ? `<div class="top-story-summary">${a.summary}</div>`
-      : '';
+      ? `<div class="top-story-summary">${a.summary}</div><div class="read-more">Read full article →</div>`
+      : '<div class="read-more">Read full article →</div>';
     return `
       <a class="top-story" data-cat="${a.category}" href="${escUrl(a.url)}" target="_blank" rel="noopener noreferrer">
         ${img}
@@ -426,8 +434,8 @@
   // ── RENDER CARD ──
   function renderCard(a) {
     const summary = a.summary
-      ? `<div class="card-summary">${a.summary}</div>`
-      : '';
+      ? `<div class="card-summary">${a.summary}</div><div class="read-more">Read full article →</div>`
+      : '<div class="read-more">Read full article →</div>';
     const thumb = a.thumbnail
       ? `<img class="card-thumb" src="${a.thumbnail}" alt="" loading="lazy" onerror="this.style.display='none'">`
       : '';

@@ -37,6 +37,12 @@ for = "/sw.js"
   Cache-Control = "no-cache"
 
 [[redirects]]
+from = "/news"
+to = "/news-app.html"
+status = 200
+force = false
+
+[[redirects]]
 from = "/auth/strava"
 to = "/.netlify/functions/strava-auth"
 status = 200
