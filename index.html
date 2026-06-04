@@ -701,26 +701,6 @@
     font-weight: 700;
   }
 
-  /* ── DONE STATE ── */
-  .day-row.done {
-    opacity: 0.45;
-    position: relative;
-  }
-
-  .day-row.done::after {
-    content: '✓';
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--easy);
-    font-size: 16px;
-    font-weight: 700;
-  }
-
-  .day-row.done .activity-tag {
-    text-decoration: line-through;
-  }
 
   /* ── PROGRESS BAR ── */
   .phase-progress {
@@ -2693,8 +2673,7 @@
         const notes = row.querySelector('.day-notes');
         const tagText = tag ? tag.textContent.trim() : '';
         const noteText = notes ? notes.textContent.trim() : '';
-        const isDone = row.classList.contains('done');
-        CAL_SCHEDULE[key] = { tagText, noteText, isDone, row };
+        CAL_SCHEDULE[key] = { tagText, noteText, row };
       });
     });
   }
@@ -2729,7 +2708,6 @@
       const entry = CAL_SCHEDULE[key];
       const isToday = today.getFullYear() === calYear && today.getMonth() === calMonth && today.getDate() === d;
       const color = entry ? getDayColor(entry.tagText) : 'transparent';
-      const isDone = entry?.isDone;
       const border = isToday ? '2px solid var(--accent)' : '1px solid var(--border)';
       const bg = entry ? `${color}22` : 'var(--surface)';
       const dotColor = entry ? color : 'transparent';
@@ -2740,7 +2718,6 @@
         position:relative; overflow:hidden;">
         <div style="font-family:'DM Mono',monospace; font-size:10px; color:${isToday ? 'var(--accent)' : 'var(--text)'}; font-weight:${isToday ? '700' : '400'};">${d}</div>
         ${entry ? `<div style="width:6px;height:6px;border-radius:50%;background:${dotColor};flex-shrink:0;"></div>` : ''}
-        ${isDone ? '<div style="position:absolute;top:2px;right:3px;font-size:8px;color:#6ee26e;">✓</div>' : ''}
       </div>`;
     }
     grid.innerHTML = html;
@@ -2776,7 +2753,6 @@
       contentEl.innerHTML = `
         <div style="display:inline-block; background:${color}22; color:${color}; border:1px solid ${color}44; border-radius:4px; padding:4px 10px; font-family:'DM Mono',monospace; font-size:11px; margin-bottom:10px;">${entry.tagText}</div>
         ${entry.noteText ? `<div style="font-size:12px; color:var(--muted); line-height:1.6;">${entry.noteText}</div>` : ''}
-        ${entry.isDone ? '<div style="font-size:11px; color:#6ee26e; margin-top:8px;">✓ Completed</div>' : ''}
       `;
     }
     detail.style.display = 'block';
@@ -2862,15 +2838,13 @@
             if (dn === dayName) {
               const tag = row.querySelector('.activity-tag');
               if (tag && (tag.textContent.toUpperCase().includes('RUN') || tag.textContent.includes('🏅'))) {
-                row.classList.add('done');
+                // no-op: completion tracking removed
               }
             }
           });
         }
       });
     });
-    saveDoneState();
-    updateProgressBars();
   }
 
   function stravaLoadSaved() {
@@ -3025,7 +2999,7 @@
     expandCurrentWeek();
     highlightToday();
     updateTodayPill();
-    loadDoneState();
+    try { localStorage.removeItem('marathon_done'); } catch(e) {}
     loadRaceState();
     updateProgressBars();
     initSwipe();
