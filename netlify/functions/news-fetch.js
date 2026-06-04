@@ -21,10 +21,15 @@ const FEEDS = {
     { url: 'https://feeds.reuters.com/reuters/worldNews',             source: 'Reuters' },
   ],
   sports: [
-    { url: 'https://www.espn.com/espn/rss/news',                      source: 'ESPN' },
+    { url: 'https://www.espn.com/espn/rss/nba/news',                  source: 'ESPN NBA' },
+    { url: 'https://www.espn.com/espn/rss/nfl/news',                  source: 'ESPN NFL' },
+    { url: 'https://www.espn.com/espn/rss/mlb/news',                  source: 'ESPN MLB' },
+    { url: 'https://www.espn.com/espn/rss/soccer/news',               source: 'ESPN Soccer' },
     { url: 'https://feeds.apnews.com/rss/apf-sports',                 source: 'AP News' },
-    { url: 'https://www.cbssports.com/rss/headlines/',                source: 'CBS Sports' },
-    { url: 'https://sports.yahoo.com/rss/',                           source: 'Yahoo Sports' },
+    { url: 'https://www.cbssports.com/rss/headlines/nba/',            source: 'CBS Sports NBA' },
+    { url: 'https://www.cbssports.com/rss/headlines/nfl/',            source: 'CBS Sports NFL' },
+    { url: 'https://sports.yahoo.com/nba/rss.xml',                    source: 'Yahoo NBA' },
+    { url: 'https://sports.yahoo.com/nfl/rss.xml',                    source: 'Yahoo NFL' },
   ],
   local: [
     { url: 'https://ny.eater.com/rss/index.xml',                      source: 'Eater NY' },
@@ -100,7 +105,7 @@ function parseDate(s) {
 
 function parseRSS(xml, source) {
   const raw = xml.match(/<item[\s\S]*?<\/item>/gi) || xml.match(/<entry[\s\S]*?<\/entry>/gi) || [];
-  return raw.slice(0, 15).flatMap(item => {
+  return raw.slice(0, 20).flatMap(item => {
     const title = extractText(item, 'title');
     const link = extractLink(item);
     if (!title || !link) return [];
@@ -125,7 +130,7 @@ async function fetchFeed({ url, source }) {
 }
 
 function toFallback(articles, category) {
-  return articles.slice(0, 5).map(a => ({
+  return articles.slice(0, 8).map(a => ({
     id: a.link,
     headline: a.title,
     summary: a.description.slice(0, 200),
@@ -143,14 +148,14 @@ async function summarize(articles, category) {
   // Sort newest first, cap at 25 articles sent to Claude
   const recent = articles
     .sort((a, b) => new Date(b.time) - new Date(a.time))
-    .slice(0, 25);
+    .slice(0, 50);
 
   if (!apiKey || !recent.length) return toFallback(recent, category);
 
   const catLabel = {
     politics: 'US politics',
     world: 'world news',
-    sports: 'sports',
+    sports: 'sports — prioritize NBA and NFL heavily; include notable MLB news; for soccer, only cover major events (World Cup, Champions League, big international results); skip all other sports',
     local: 'New York City — restaurants, bars, food scene, events, and cool new openings',
   }[category] || category;
 
@@ -160,7 +165,7 @@ async function summarize(articles, category) {
 
   const prompt = `You are a news editor for a mobile news app. Below are recent ${catLabel} articles from multiple outlets. Different outlets often cover the same story.
 
-Group articles by story, then synthesize details from ALL outlets covering each story into one thorough summary. Pick the 5 most important distinct stories.
+Group articles by story, then synthesize details from ALL outlets covering each story into one thorough summary. Pick the 8 most important distinct stories.
 
 Return ONLY a JSON array — no markdown, no explanation:
 [{"headline":"Sharp specific headline","summary":"A thorough 5-7 sentence paragraph (~150 words) synthesizing all sources. Cover: what happened, key details and context, different angles or reactions from the various outlets, and what it means or what comes next. The reader should feel fully informed without needing to read the original articles.","sources":["AP News","CNN"],"primary_id":1}]
@@ -172,7 +177,7 @@ ${articlesText}`;
 
   const reqBody = JSON.stringify({
     model: 'claude-haiku-4-5-20251001',
-    max_tokens: 2500,
+    max_tokens: 4000,
     messages: [{ role: 'user', content: prompt }],
   });
 

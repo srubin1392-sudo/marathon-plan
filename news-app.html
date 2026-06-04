@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Brief">
 <meta name="theme-color" content="#0a0a0a">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>The Brief</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -337,7 +340,7 @@
     cursor: pointer;
   }
 
-  /* ── LAST UPDATED ── */
+  /* ── LAST UPDATED / CAUGHT UP ── */
   .last-updated {
     text-align: center;
     font-family: 'DM Mono', monospace;
@@ -345,6 +348,37 @@
     letter-spacing: 0.08em;
     color: var(--muted);
     padding: 24px 0 8px;
+  }
+
+  .caught-up {
+    text-align: center;
+    padding: 32px 24px 48px;
+    color: var(--muted);
+  }
+  .caught-up .cu-icon { font-size: 28px; margin-bottom: 10px; }
+  .caught-up .cu-msg {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .caught-up .cu-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ── LOAD MORE SPINNER ── */
+  .load-more-spinner {
+    text-align: center;
+    padding: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
 </style>
@@ -371,11 +405,14 @@
 <div class="content" id="content"></div>
 
 <script>
-  const CACHE_KEY  = 'brief_v4_data';
-  const CACHE_DATE = 'brief_v4_date';
+  const CACHE_KEY  = 'brief_v5_data';
+  const CACHE_DATE = 'brief_v5_date';
+  const BATCH_SIZE = 6;
 
   let data = null;
   let activeTab = 'all';
+  let shownCount = 0;
+  let scrollObserver = null;
 
   // ── DATE HEADER ──
   function updateHeader() {
@@ -401,6 +438,13 @@
   // ── CATEGORY LABELS ──
   const CAT_LABELS = { politics: 'Politics', world: 'World', sports: 'Sports', local: 'Local NY' };
   const CAT_ICONS  = { politics: '🗳', world: '🌍', sports: '⚽', local: '🗽' };
+
+  // ── TODAY FILTER ──
+  function getArticles() {
+    const todayStr = new Date().toDateString();
+    const pool = activeTab === 'all' ? data.all : (data[activeTab] || []);
+    return pool.filter(a => new Date(a.time).toDateString() === todayStr);
+  }
 
   // ── RENDER TOP STORY ──
   function renderTopStory(a) {
@@ -455,61 +499,58 @@
       </a>`;
   }
 
-  // ── SECTION BLOCK (for All tab) ──
-  function renderSection(cat, articles, max) {
-    if (!articles || !articles.length) return '';
-    const items = articles.slice(0, max);
+  // ── CAUGHT UP FOOTER ──
+  function caughtUpHtml() {
+    const d = new Date();
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     return `
-      <div class="section-label" data-cat="${cat}">
-        <div class="section-label-dot"></div>
-        ${CAT_ICONS[cat]} ${CAT_LABELS[cat]}
-      </div>
-      ${items.map((a, i) => i === 0 && cat !== 'local' ? renderTopStory(a) : renderCard(a)).join('')}
-    `;
+      <div class="caught-up">
+        <div class="cu-icon">✓</div>
+        <div class="cu-msg">You're all caught up</div>
+        <div class="cu-sub">${months[d.getMonth()]} ${d.getDate()} · AP · ESPN · BBC · more</div>
+      </div>`;
   }
 
-  // ── RENDER FEED ──
-  function renderFeed() {
-    const el = document.getElementById('content');
-    if (!data) return;
+  // ── INFINITE SCROLL: append next batch ──
+  function appendBatch() {
+    const articles = getArticles();
+    const batch = articles.slice(shownCount, shownCount + BATCH_SIZE);
+    if (!batch.length) return;
 
-    if (activeTab === 'all') {
-      const topStory = data.all[0];
-      const rest = {
-        politics: data.politics.slice(0, 3),
-        world:    data.world.slice(0, 3),
-        sports:   data.sports.slice(0, 3),
-        local:    data.local.slice(0, 3)
-      };
-      let html = '';
-      if (topStory) {
-        html += `<div class="section-label" style="padding-top:4px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding-bottom:8px;">Top Story</div>`;
-        html += renderTopStory(topStory);
-      }
-      html += renderSection('politics', rest.politics, 3);
-      html += renderSection('world',    rest.world,    3);
-      html += renderSection('sports',   rest.sports,   3);
-      html += renderSection('local',    rest.local,    3);
-      html += renderLastUpdated();
-      el.innerHTML = html;
-    } else {
-      const articles = data[activeTab] || [];
-      if (!articles.length) {
-        el.innerHTML = emptyState();
-        return;
-      }
-      let html = articles.map((a, i) => i === 0 ? renderTopStory(a) : renderCard(a)).join('');
-      html += renderLastUpdated();
-      el.innerHTML = html;
+    const sentinel = document.getElementById('scroll-sentinel');
+    const html = batch.map((a, i) => (shownCount + i === 0) ? renderTopStory(a) : renderCard(a)).join('');
+    sentinel.insertAdjacentHTML('beforebegin', html);
+    shownCount += batch.length;
+
+    if (shownCount >= articles.length) {
+      sentinel.outerHTML = caughtUpHtml();
+      if (scrollObserver) { scrollObserver.disconnect(); scrollObserver = null; }
     }
   }
 
-  function renderLastUpdated() {
-    try {
-      const d = localStorage.getItem(CACHE_DATE);
-      if (d) return `<div class="last-updated">Updated ${d === new Date().toDateString() ? 'today' : d} · AP · CNN · ESPN · BBC · more</div>`;
-    } catch(e) {}
-    return '<div class="last-updated">AP · CNN · ESPN · BBC · more</div>';
+  // ── RENDER FEED (full reset) ──
+  function renderFeed() {
+    if (!data) return;
+    shownCount = 0;
+    if (scrollObserver) { scrollObserver.disconnect(); scrollObserver = null; }
+
+    const el = document.getElementById('content');
+    const articles = getArticles();
+
+    if (!articles.length) {
+      el.innerHTML = emptyState('No stories from today yet.<br>Try refreshing later.');
+      return;
+    }
+
+    el.innerHTML = '<div id="scroll-sentinel" style="height:1px"></div>';
+    appendBatch();
+
+    scrollObserver = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) appendBatch();
+    }, { rootMargin: '400px' });
+
+    const sentinel = document.getElementById('scroll-sentinel');
+    if (sentinel) scrollObserver.observe(sentinel);
   }
 
   // ── SKELETON ──
@@ -611,6 +652,7 @@
     const w = window.open(a.href, '_blank', 'noopener,noreferrer');
     if (!w || w.closed) window.location.href = a.href;
   });
+
   function catRgb(cat) {
     return { politics: '168,85,247', world: '59,130,246', sports: '34,197,94', local: '249,115,22' }[cat] || '255,255,255';
   }
