@@ -30,6 +30,9 @@ functions = "C:\\marathon-plan\\netlify\\functions"
   [functions."news-fetch"]
     timeout = 26
 
+  [functions."news-summarize-background"]
+    schedule = "0 */2 * * *"
+
 [[headers]]
 for = "/sw.js"
 
@@ -57,6 +60,18 @@ force = false
 [[redirects]]
 from = "/sync/strava"
 to = "/.netlify/functions/strava-sync"
+status = 200
+force = false
+
+  [redirects.query]
+
+  [redirects.conditions]
+
+  [redirects.headers]
+
+[[redirects]]
+from = "/sync/runna"
+to = "/.netlify/functions/runna-sync"
 status = 200
 force = false
 

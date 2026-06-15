@@ -26,6 +26,8 @@
     --world: #3b82f6;
     --sports: #22c55e;
     --local: #f97316;
+    --eats: #f59e0b;
+    --entertainment: #ec4899;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -124,6 +126,8 @@
   .tab[data-cat="world"].active    { color: var(--world);    background: rgba(59,130,246,0.12);  border-color: rgba(59,130,246,0.3); }
   .tab[data-cat="sports"].active   { color: var(--sports);   background: rgba(34,197,94,0.12);   border-color: rgba(34,197,94,0.3); }
   .tab[data-cat="local"].active    { color: var(--local);    background: rgba(249,115,22,0.12);  border-color: rgba(249,115,22,0.3); }
+  .tab[data-cat="eats"].active          { color: var(--eats);          background: rgba(245,158,11,0.12);  border-color: rgba(245,158,11,0.3); }
+  .tab[data-cat="entertainment"].active { color: var(--entertainment);  background: rgba(236,72,153,0.12);  border-color: rgba(236,72,153,0.3); }
 
   /* ── CONTENT ── */
   .content {
@@ -155,6 +159,8 @@
   .section-label[data-cat="world"]    .section-label-dot { background: var(--world); }
   .section-label[data-cat="sports"]   .section-label-dot { background: var(--sports); }
   .section-label[data-cat="local"]    .section-label-dot { background: var(--local); }
+  .section-label[data-cat="eats"]          .section-label-dot { background: var(--eats); }
+  .section-label[data-cat="entertainment"] .section-label-dot { background: var(--entertainment); }
 
   /* ── TOP STORY CARD ── */
   .top-story {
@@ -228,6 +234,8 @@
   .card[data-cat="world"]    .card-bar { background: var(--world); }
   .card[data-cat="sports"]   .card-bar { background: var(--sports); }
   .card[data-cat="local"]    .card-bar { background: var(--local); }
+  .card[data-cat="eats"]          .card-bar { background: var(--eats); }
+  .card[data-cat="entertainment"] .card-bar { background: var(--entertainment); }
 
   .card-body {
     padding: 11px 12px;
@@ -254,6 +262,8 @@
   .card[data-cat="world"]    .cat-pill { color: var(--world);    background: rgba(59,130,246,0.12); }
   .card[data-cat="sports"]   .cat-pill { color: var(--sports);   background: rgba(34,197,94,0.12); }
   .card[data-cat="local"]    .cat-pill { color: var(--local);    background: rgba(249,115,22,0.12); }
+  .card[data-cat="eats"]          .cat-pill { color: var(--eats);          background: rgba(245,158,11,0.12); }
+  .card[data-cat="entertainment"] .cat-pill { color: var(--entertainment);  background: rgba(236,72,153,0.12); }
 
   .card-time {
     font-family: 'DM Mono', monospace;
@@ -284,6 +294,34 @@
     font-size: 12px;
     line-height: 1.6;
     color: var(--muted2);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-summary.expanded {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    gap: 8px;
+  }
+  .expand-btn {
+    background: none;
+    border: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
   }
 
   .read-more {
@@ -381,6 +419,68 @@
     color: var(--muted);
   }
 
+  /* ── FONT SIZE VARIANTS ── */
+  body.font-large .card-headline      { font-size: 15px; }
+  body.font-large .card-summary       { font-size: 13px; }
+  body.font-large .top-story-headline { font-size: 20px; }
+  body.font-large .top-story-summary  { font-size: 15px; }
+  body.font-small .card-headline      { font-size: 11px; }
+  body.font-small .card-summary       { font-size: 10px; }
+  body.font-small .top-story-headline { font-size: 14px; }
+  body.font-small .top-story-summary  { font-size: 11px; }
+
+  /* ── FONT SIZE BUTTON ── */
+  .font-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted2);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+  }
+  .font-btn:active { opacity: 0.5; }
+
+  /* ── BOOKMARK ── */
+  .card { position: relative; }
+  .card.bookmarked .card-time::after { content: ' ★'; color: #f59e0b; font-size: 8px; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 1000;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ── SAVED TAB ── */
+  .tab[data-cat="saved"].active { color: #f59e0b; background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.3); }
+
+  /* ── STALE DATA INDICATOR ── */
+  .brand-meta.stale { color: #f59e0b; }
+  .brand-meta.old   { color: #ef4444; }
+
 </style>
 </head>
 <body>
@@ -391,28 +491,81 @@
       <div class="brand-title">THE BRIEF</div>
       <div class="brand-meta" id="header-date">Cobble Hill, Brooklyn</div>
     </div>
-    <button class="refresh-btn" id="refresh-btn" onclick="loadNews(true)" title="Refresh">↻</button>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="font-btn" id="font-btn" onclick="cycleFont()" title="Font size">A</button>
+      <button class="refresh-btn" id="refresh-btn" onclick="loadNews(true)" title="Refresh">↻</button>
+    </div>
   </div>
   <div class="tabs">
-    <button class="tab active" data-cat="all"      onclick="setTab('all')">All</button>
-    <button class="tab"        data-cat="politics" onclick="setTab('politics')">Politics</button>
-    <button class="tab"        data-cat="world"    onclick="setTab('world')">World</button>
-    <button class="tab"        data-cat="sports"   onclick="setTab('sports')">Sports</button>
-    <button class="tab"        data-cat="local"    onclick="setTab('local')">Local NY</button>
+    <button class="tab active" data-cat="all"           onclick="setTab('all')">All</button>
+    <button class="tab"        data-cat="politics"      onclick="setTab('politics')">Politics</button>
+    <button class="tab"        data-cat="local"         onclick="setTab('local')">Local NY</button>
+    <button class="tab"        data-cat="eats"          onclick="setTab('eats')">Eats</button>
+    <button class="tab"        data-cat="entertainment" onclick="setTab('entertainment')">Entertainment</button>
+    <button class="tab"        data-cat="sports"        onclick="setTab('sports')">Sports</button>
+    <button class="tab"        data-cat="world"         onclick="setTab('world')">World</button>
+    <button class="tab"        data-cat="saved"         onclick="setTab('saved')">Saved ★</button>
   </div>
 </div>
 
 <div class="content" id="content"></div>
 
 <script>
-  const CACHE_KEY  = 'brief_v5_data';
-  const CACHE_DATE = 'brief_v5_date';
+  const CACHE_KEY  = 'brief_v8_data';
+  const CACHE_TS   = 'brief_v8_ts';
+  const CACHE_TTL  = 2 * 60 * 60 * 1000;
   const BATCH_SIZE = 6;
+  const SAVED_KEY  = 'brief_bookmarks';
+  const FONT_KEY   = 'brief_font';
+  const FONT_SIZES = ['', 'font-large', 'font-small'];
+  const TAB_ORDER  = ['all', 'politics', 'local', 'eats', 'entertainment', 'sports', 'world', 'saved'];
 
   let data = null;
-  let activeTab = 'all';
+  let activeTab = sessionStorage.getItem('activeTab') || 'all';
   let shownCount = 0;
   let scrollObserver = null;
+  let longPressTimer = null;
+  let longPressTriggered = false;
+
+  // ── FONT SIZE ──
+  function applyFont() {
+    FONT_SIZES.forEach(c => { if (c) document.body.classList.remove(c); });
+    const s = localStorage.getItem(FONT_KEY) || '';
+    if (s) document.body.classList.add(s);
+  }
+  function cycleFont() {
+    const cur = localStorage.getItem(FONT_KEY) || '';
+    const next = FONT_SIZES[(FONT_SIZES.indexOf(cur) + 1) % FONT_SIZES.length];
+    localStorage.setItem(FONT_KEY, next);
+    applyFont();
+  }
+  applyFont();
+
+  // ── BOOKMARKS ──
+  function getSaved() {
+    try { return JSON.parse(localStorage.getItem(SAVED_KEY) || '[]'); } catch { return []; }
+  }
+  function isBookmarked(id) { return getSaved().some(a => a.id === id); }
+  function toggleBookmark(article) {
+    const saved = getSaved();
+    const idx = saved.findIndex(a => a.id === article.id);
+    if (idx >= 0) saved.splice(idx, 1); else saved.unshift(article);
+    localStorage.setItem(SAVED_KEY, JSON.stringify(saved.slice(0, 100)));
+  }
+  function findArticle(id) {
+    if (data?.all) { const f = data.all.find(a => a.id === id); if (f) return f; }
+    return getSaved().find(a => a.id === id) || null;
+  }
+
+  // ── TOAST ──
+  function showToast(msg) {
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = msg;
+    document.body.appendChild(t);
+    requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
+    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 1800);
+  }
 
   // ── DATE HEADER ──
   function updateHeader() {
@@ -436,14 +589,15 @@
   }
 
   // ── CATEGORY LABELS ──
-  const CAT_LABELS = { politics: 'Politics', world: 'World', sports: 'Sports', local: 'Local NY' };
-  const CAT_ICONS  = { politics: '🗳', world: '🌍', sports: '⚽', local: '🗽' };
+  const CAT_LABELS = { politics: 'Politics', world: 'World', sports: 'Sports', local: 'Local NY', eats: 'Eats', entertainment: 'Entertainment', saved: 'Saved' };
+  const CAT_ICONS  = { politics: '🗳', world: '🌍', sports: '⚽', local: '🗽', eats: '🍽', entertainment: '🎬', saved: '★' };
 
-  // ── TODAY FILTER ──
+  // ── ARTICLE FILTER (today + last 24h so nothing from the day gets cut off) ──
   function getArticles() {
-    const todayStr = new Date().toDateString();
-    const pool = activeTab === 'all' ? data.all : (data[activeTab] || []);
-    return pool.filter(a => new Date(a.time).toDateString() === todayStr);
+    if (activeTab === 'saved') return getSaved();
+    const cutoff = Date.now() - 24 * 60 * 60 * 1000;
+    const pool = activeTab === 'all' ? (data.all || []) : (data[activeTab] || []);
+    return pool.filter(a => new Date(a.time).getTime() > cutoff);
   }
 
   // ── RENDER TOP STORY ──
@@ -455,7 +609,7 @@
       ? `<div class="top-story-summary">${a.summary}</div><div class="read-more">Read full article →</div>`
       : '<div class="read-more">Read full article →</div>';
     return `
-      <a class="top-story" data-cat="${a.category}" href="${escUrl(a.url)}" target="_blank" rel="noopener noreferrer">
+      <a class="top-story" data-cat="${a.category}" data-aid="${encodeURIComponent(a.id)}" href="${escUrl(a.url)}" target="_blank" rel="noopener noreferrer">
         ${img}
         <div class="top-story-body">
           <div class="top-story-meta">
@@ -477,14 +631,16 @@
 
   // ── RENDER CARD ──
   function renderCard(a) {
-    const summary = a.summary
-      ? `<div class="card-summary">${a.summary}</div><div class="read-more">Read full article →</div>`
-      : '<div class="read-more">Read full article →</div>';
-    const thumb = a.thumbnail
-      ? `<img class="card-thumb" src="${a.thumbnail}" alt="" loading="lazy" onerror="this.style.display='none'">`
-      : '';
+    const bmClass = isBookmarked(a.id) ? ' bookmarked' : '';
+    const footer = a.summary
+      ? `<div class="card-summary">${a.summary}</div>
+         <div class="card-footer">
+           <span class="expand-btn">more ↓</span>
+           <span class="read-more">Read full article →</span>
+         </div>`
+      : `<div class="card-footer"><span class="read-more">Read full article →</span></div>`;
     return `
-      <a class="card" data-cat="${a.category}" href="${escUrl(a.url)}" target="_blank" rel="noopener noreferrer">
+      <a class="card${bmClass}" data-cat="${a.category}" data-aid="${encodeURIComponent(a.id)}" href="${escUrl(a.url)}" target="_blank" rel="noopener noreferrer">
         <div class="card-bar"></div>
         <div class="card-body">
           <div class="card-meta">
@@ -493,9 +649,8 @@
             <span class="card-time">${timeAgo(a.time)}</span>
           </div>
           <div class="card-headline">${a.headline}</div>
-          ${summary}
+          ${footer}
         </div>
-        ${thumb}
       </a>`;
   }
 
@@ -508,6 +663,7 @@
         <div class="cu-icon">✓</div>
         <div class="cu-msg">You're all caught up</div>
         <div class="cu-sub">${months[d.getMonth()]} ${d.getDate()} · AP · ESPN · BBC · more</div>
+        <button class="retry-btn" style="margin-top:14px" onclick="loadNews(true)">↻ Check for new stories</button>
       </div>`;
   }
 
@@ -530,7 +686,7 @@
 
   // ── RENDER FEED (full reset) ──
   function renderFeed() {
-    if (!data) return;
+    if (!data && activeTab !== 'saved') return;
     shownCount = 0;
     if (scrollObserver) { scrollObserver.disconnect(); scrollObserver = null; }
 
@@ -580,23 +736,42 @@
   // ── TAB SWITCH ──
   function setTab(cat) {
     activeTab = cat;
+    sessionStorage.setItem('activeTab', cat);
     document.querySelectorAll('.tab').forEach(t =>
       t.classList.toggle('active', t.dataset.cat === cat));
-    if (data) {
+    if (data || cat === 'saved') {
       renderFeed();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
+  // ── GENERATED-AT LABEL ──
+  function showGeneratedAt(isoStr) {
+    if (!isoStr) return;
+    const label = document.getElementById('header-date');
+    const diffMin = Math.floor((Date.now() - new Date(isoStr)) / 60000);
+    const ago = diffMin < 2 ? 'just now' : diffMin < 60 ? `${diffMin}m ago` : `${Math.floor(diffMin / 60)}h ago`;
+    const d = new Date();
+    const days   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    label.textContent = `Cobble Hill · ${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()} · updated ${ago}`;
+    label.className = 'brand-meta' + (diffMin > 120 ? ' old' : diffMin > 60 ? ' stale' : '');
+  }
+
   // ── FETCH ──
   async function loadNews(forceRefresh = false) {
+    // Restore active tab highlight on initial load
+    document.querySelectorAll('.tab').forEach(t =>
+      t.classList.toggle('active', t.dataset.cat === activeTab));
+
     if (!forceRefresh) {
       try {
-        const cacheDate = localStorage.getItem(CACHE_DATE);
-        if (cacheDate === new Date().toDateString()) {
+        const ts = parseInt(localStorage.getItem(CACHE_TS) || '0', 10);
+        if (Date.now() - ts < CACHE_TTL) {
           const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
           if (cached?.all?.length) {
             data = cached;
+            showGeneratedAt(cached.generatedAt);
             renderFeed();
             return;
           }
@@ -612,15 +787,26 @@
       const res = await fetch('/.netlify/functions/news-fetch');
       const json = await res.json();
 
+      if (json.loading) {
+        document.getElementById('content').innerHTML = `
+          <div class="empty-state">
+            <div class="icon">⏳</div>
+            <div class="msg">Generating your briefings...<br>This takes about 2 minutes the first time.<br>This page will retry automatically.</div>
+          </div>`;
+        setTimeout(() => loadNews(true), 20000);
+        return;
+      }
+
       if (json.error) {
         document.getElementById('content').innerHTML = emptyState(json.error);
         return;
       }
 
       data = json;
+      showGeneratedAt(json.generatedAt);
       try {
         localStorage.setItem(CACHE_KEY, JSON.stringify(data));
-        localStorage.setItem(CACHE_DATE, new Date().toDateString());
+        localStorage.setItem(CACHE_TS, String(Date.now()));
       } catch(e) {}
       renderFeed();
     } catch(err) {
@@ -644,8 +830,23 @@
     return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
   }
 
-  // ── ARTICLE CLICK (belt-and-suspenders for iOS PWA + popup blockers) ──
+  // ── EXPAND SUMMARY TOGGLE ──
+  function toggleSummary(btn) {
+    const summary = btn.closest('.card-body').querySelector('.card-summary');
+    const expanded = summary.classList.toggle('expanded');
+    btn.textContent = expanded ? 'less ↑' : 'more ↓';
+  }
+
+  // ── ARTICLE CLICK ──
   document.getElementById('content').addEventListener('click', function(e) {
+    if (longPressTriggered) { longPressTriggered = false; e.preventDefault(); return; }
+    const expandBtn = e.target.closest('.expand-btn');
+    if (expandBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleSummary(expandBtn);
+      return;
+    }
     const a = e.target.closest('a[href]');
     if (!a || !a.href.startsWith('http')) return;
     e.preventDefault();
@@ -653,8 +854,44 @@
     if (!w || w.closed) window.location.href = a.href;
   });
 
+  // ── LONG-PRESS TO BOOKMARK ──
+  const contentEl = document.getElementById('content');
+  contentEl.addEventListener('touchstart', e => {
+    const card = e.target.closest('a[data-aid]');
+    if (!card) return;
+    longPressTimer = setTimeout(() => {
+      longPressTriggered = true;
+      const id = decodeURIComponent(card.dataset.aid);
+      const article = findArticle(id);
+      if (!article) return;
+      toggleBookmark(article);
+      const bm = isBookmarked(id);
+      card.classList.toggle('bookmarked', bm);
+      if (navigator.vibrate) navigator.vibrate(50);
+      showToast(bm ? '★ Saved' : 'Removed from saved');
+      if (activeTab === 'saved') renderFeed();
+    }, 600);
+  }, { passive: true });
+  contentEl.addEventListener('touchend',  () => clearTimeout(longPressTimer), { passive: true });
+  contentEl.addEventListener('touchmove', () => clearTimeout(longPressTimer), { passive: true });
+
+  // ── SWIPE BETWEEN TABS ──
+  let swipeStartX = 0, swipeStartY = 0;
+  document.addEventListener('touchstart', e => {
+    swipeStartX = e.touches[0].clientX;
+    swipeStartY = e.touches[0].clientY;
+  }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - swipeStartX;
+    const dy = e.changedTouches[0].clientY - swipeStartY;
+    if (Math.abs(dx) < 55 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+    const idx = TAB_ORDER.indexOf(activeTab);
+    if (dx < 0 && idx < TAB_ORDER.length - 1) setTab(TAB_ORDER[idx + 1]);
+    if (dx > 0 && idx > 0) setTab(TAB_ORDER[idx - 1]);
+  }, { passive: true });
+
   function catRgb(cat) {
-    return { politics: '168,85,247', world: '59,130,246', sports: '34,197,94', local: '249,115,22' }[cat] || '255,255,255';
+    return { politics: '168,85,247', world: '59,130,246', sports: '34,197,94', local: '249,115,22', eats: '245,158,11', entertainment: '236,72,153' }[cat] || '255,255,255';
   }
 
   loadNews();

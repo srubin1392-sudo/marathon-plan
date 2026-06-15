@@ -287,7 +287,7 @@
 
   .week-body {
     padding: 0;
-    max-height: 8000px;
+    max-height: 2000px;
     overflow: hidden;
     transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1),
                 opacity 0.3s ease;
@@ -374,26 +374,20 @@
   }
 
   .race-breakdown {
-    display: grid;
-    grid-template-columns: 48px 160px 1fr;
-    border-bottom: 1px solid var(--border);
-  }
-  .race-breakdown > span {
-    grid-column: 3;
     font-size: 11px;
     color: var(--muted);
     line-height: 1.6;
     padding: 0 12px 10px;
+    margin-top: -4px;
   }
   .race-breakdown strong { color: var(--text); }
 
   .day-row.completed { opacity: 0.55; }
   .day-row .runna-actual {
-    display: block;
     font-family: 'DM Mono', monospace;
     font-size: 10px;
     color: var(--accent3);
-    margin-top: 4px;
+    margin-left: 6px;
   }
 
   .day-notes {
@@ -402,8 +396,7 @@
     line-height: 1.5;
     padding: 10px 12px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
   }
 
   /* WORKOUT DETAILS */
@@ -545,7 +538,6 @@
     .day-row { grid-template-columns: 48px 140px 1fr; min-height: 52px; }
     .activity-tag { font-size: 9px; padding: 8px 6px; }
     .day-notes { font-size: 11px; padding: 8px 10px; }
-    .race-breakdown { grid-template-columns: 48px 140px 1fr; }
 
     /* Race note boxes */
     .race-note-box { font-size: 11px; padding: 10px 12px; }
@@ -914,8 +906,8 @@
   <button class="phase-tab" data-phase="home" onclick="showPhase('home')">🏠 Home</button>
   <button class="phase-tab" data-phase="phase1" onclick="showPhase('phase1')">🛏️ Phase 1: Recovery</button>
   <button class="phase-tab" data-phase="phase2" onclick="showPhase('phase2')">💪 Phase 2: Recomp</button>
-  <button class="phase-tab" data-phase="phase3" onclick="showPhase('phase3')">🏃 Phase 3: Base + Tune-Ups</button>
-  <button class="phase-tab" data-phase="phase4" onclick="showPhase('phase4')">🏗️ Phase 4: Peak + Taper</button>
+  <button class="phase-tab" data-phase="phase3" onclick="showPhase('phase3')">🏃 Phase 3: Base Training</button>
+  <button class="phase-tab" data-phase="phase4" onclick="showPhase('phase4')">🏗️ Phase 4: Marathon Build</button>
   <button class="phase-tab" data-phase="library" onclick="showPhase('library')">🏋️ Workout Library</button>
   <button class="phase-tab" data-phase="pace" onclick="showPhase('pace')">⏱ Pace Calc</button>
   <button class="phase-tab" data-phase="log" onclick="showPhase('log')">📊 Training Log</button>
@@ -1137,108 +1129,89 @@
   </div>
 </div>
 
-<!-- PHASE 3: BASE BUILD + TUNE-UP RACES -->
+<!-- PHASE 3: BASE TRAINING -->
 <div id="phase3" class="phase-content">
   <div class="phase-header">
     <div>
-      <div class="phase-title">PHASE 3: BASE BUILD + TUNE-UP RACES</div>
-      <div class="phase-subtitle">Jun 8 – Aug 23 (11 weeks). New Runna plan begins. One 30–40 min hip/glute strength session per week on an easy midweek day — never the day before a long run or race. Z2 = 136–151bpm for Easy/Long runs (use HR if pace drifts in the heat).</div>
+      <div class="phase-title">PHASE 3: BASE TRAINING</div>
+      <div class="phase-subtitle">Jun 15 – Aug 23 (11 weeks). Running program drives the schedule — add workouts each week as they're assigned. Protect lifting 2x/week and daily mobility. Never lift heavy the day before a long run or key workout.</div>
     </div>
-    <div class="phase-badge">WEEKS 7–17<br>Jun 8 – Aug 23</div>
+    <div class="phase-badge">WEEKS 8–18<br>Jun 15 – Aug 23</div>
   </div>
 
-  <!-- Week 7 — Runna Plan Begins -->
+  <!-- Week 8 — Queens Race Week -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 7 — RUNNA PLAN BEGINS</span>
-      <span class="week-dates">Jun 8 – Jun 14</span>
-      <span class="week-toggle">▾</span>
-    </div>
-    <div class="week-body">
-      <div class="day-row" data-date="2026-06-08"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-lift">LIFT A (LIGHT)</span><span class="day-notes">Drop weight by 20%. Same movements — give the body a chance to absorb 3 weeks of work.</span></div></div>
-      <div class="day-row" data-date="2026-06-09"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">EASY 4 MI</span><span class="day-notes">Zone 2, HR 136–151. Cutback week — intentionally pulling mileage back. This is when your body actually adapts. Don't try to sneak in extra miles.</span></div></div>
-      <div class="day-row" data-date="2026-06-10"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-recovery">MOBILITY</span><span class="day-notes">Full 20–30 min mobility session. IT band routine mandatory.</span></div></div>
-      <div class="day-row" data-date="2026-06-11"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 4.5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>New Runna plan starts today. Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-06-12"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-06-13"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">LONG RUN — 8.5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Easy effort throughout, per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-06-14"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-    </div>
-  </div>
-
-  <!-- Week 8 — Citizens Queens 10K -->
-  <div class="week">
-    <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 8 — CITIZENS QUEENS 10K</span>
+      <span class="week-label">WEEK 8 — QUEENS RACE WEEK</span>
       <span class="week-dates">Jun 15 – Jun 21</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-06-15"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-06-16"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-tempo">PROGRESSION RUN — 4.5 MI</span><span class="day-notes">Start easy, finish at tempo effort. Even, controlled build — last mile should be the fastest.</span></div></div>
-      <div class="day-row" data-date="2026-06-17" data-strength-day="true"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-06-18"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-06-19"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Off legs entirely before tomorrow's race.</span></div></div>
-      <div class="day-row" data-date="2026-06-20" data-race-day="true"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-race">🏅 RACE DAY — 9.2 MI</span><span class="day-notes">Citizens Queens 10K — fitness benchmark. Race the 10K ALL OUT.</span></div></div>
-      <div class="race-breakdown"><span><strong>🏅 Citizens Queens 10K — Jun 20, 2026</strong><br>2 mi easy warmup → 6.2 mi race ALL OUT (fitness benchmark) → 1 mi easy cooldown</span></div>
-      <div class="day-row" data-date="2026-06-21"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Coming off Phase 2 deload. Easy transition into Phase 3.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">EASY 35 MIN</span><span class="day-notes">Zone 2, HR 136–151. Shake the legs out — nothing heroic.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT + MOBILITY</span><span class="day-notes">Keep it lighter — race week. No heavy lower body.</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 25 MIN</span><span class="day-notes">Very easy. Just keeping legs moving before Saturday. HR under 140.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Full rest. Off legs entirely before tomorrow's race.</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-race">🏅 CITIZENS QUEENS 10K</span><span class="day-notes">NYRR 9+1 Race #5. Warm-up 1–2 mi to start → race the 10K → cool-down run home = ~7–8 mi total. Race it — legs are fresh.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Full rest. Long run covered yesterday.</span></div></div>
     </div>
   </div>
 
-  <!-- Week 9 — Vacation (Hilly) -->
+  <!-- Week 9 -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 9 — VACATION (HILLY)</span>
+      <span class="week-label">WEEK 9 — BUILD</span>
       <span class="week-dates">Jun 22 – Jun 28</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-06-22"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-hills">HILL REPEATS — 3.2 MI</span><span class="day-notes">Find a moderate hill. Hard effort up, easy jog/walk recovery down. Total session 3.2 mi including warmup/cooldown.</span></div></div>
-      <div class="day-row" data-date="2026-06-23"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-intervals">ROLLING 400S — 4.5 MI</span><span class="day-notes">Easy aerobic run with periodic 400m surges at 5K effort, jog recovery between. Total 4.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-06-24" data-strength-day="true"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-06-25"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 4.5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-06-26"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-06-27"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">HILLY LONG RUN — 9 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Vacation week — find rolling terrain if you can, but keep the effort easy regardless of hills.</span></div></div>
-      <div class="day-row" data-date="2026-06-28"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Recovery from Queens race Saturday.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2, HR 136–151. ~10:30–11:00/mi. Conversational pace — if you can't hold a sentence, slow down.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT + MOBILITY</span><span class="day-notes">IT band routine mandatory.</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">TEMPO RUN — 6 MI TOTAL</span><span class="day-notes">1.5 mi easy warm-up (Z2) → 3 mi at tempo effort (HR 151–165, ~9:30–10:00/mi, comfortably hard — you can say a few words but not hold a conversation) → 1.5 mi easy cool-down. BK Bridge Park promenade is perfect — flat and measurable. Don't skip the warm-up, your IT band needs it.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-lift">LIFT + MOBILITY</span><span class="day-notes">Upper body focus — long run tomorrow.</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 10 MI</span><span class="day-notes">Zone 2 the whole way. HR 136–151. ~10:30–11:00/mi. Gel at mile 5. Route: BK Bridge Park → Brooklyn Bridge → Lower Manhattan loop → back over bridge → home.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
     </div>
   </div>
 
-  <!-- Week 10 — Vacation / Deload -->
+  <!-- Week 10 -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 10 — VACATION / DELOAD</span>
+      <span class="week-label">WEEK 10 — BUILD</span>
       <span class="week-dates">Jun 29 – Jul 5</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-06-29"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 3.25 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Short and easy — vacation/deload week.</span></div></div>
-      <div class="day-row" data-date="2026-06-30" data-strength-day="true"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-07-01"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 4.5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-07-02"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 3 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Short and easy — vacation/deload week.</span></div></div>
-      <div class="day-row" data-date="2026-07-03"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-07-04"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">LONG RUN — 5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Vacation/deload week — short long run, easy effort.</span></div></div>
-      <div class="day-row" data-date="2026-07-05"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2, HR 136–151. ~10:30/mi. Recovery from last week's long run. Keep it honest — easy means easy.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">INTERVALS — 7 MI TOTAL</span><span class="day-notes">1.5 mi easy warm-up → 6x800m (half mile) at 5K effort (HR 165–180, ~9:00–9:15/mi, hard but controlled — you should finish each rep feeling like you could do one more) with 90 sec easy jog recovery between each → 1.5 mi easy cool-down. Find a flat stretch — the waterfront along Furman St works well. Don't blow out the first few reps; the last 2 should feel like the hardest.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT + MOBILITY</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2. Legs may feel flat from Tuesday — that's normal. Slow down as much as needed to stay in Z2.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 12 MI</span><span class="day-notes">Zone 2. HR 136–151. ~10:30–11:00/mi. Gel at miles 4 and 8. This should feel comfortable — if HR is creeping over 151 slow down, don't push through it.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
     </div>
   </div>
 
-  <!-- Week 11 — Build -->
+  <!-- Week 11 — Cutback -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 11 — BUILD</span>
+      <span class="week-label">WEEK 11 — CUTBACK ⬇️</span>
       <span class="week-dates">Jul 6 – Jul 12</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-07-06"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-07-07"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-intervals">800M REPEATS — 5 MI</span><span class="day-notes">Warmup, then 800m repeats at 5K effort with jog recovery, cooldown. Total 5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-07-08" data-strength-day="true"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-07-09"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-tempo">OVER AND UNDERS — 3.5 MI</span><span class="day-notes">Alternate between "over" (tempo+) and "under" (tempo-) pace segments. Total 3.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-07-10"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-07-11"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">LONG RUN — 9.5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Easy effort throughout, per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-07-12"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 4 MI</span><span class="day-notes">Zone 2. Cutback week — intentionally pulling back. This is when your body absorbs the last 3 weeks of training.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">STRIDES + EASY — 5 MI TOTAL</span><span class="day-notes">4 mi easy Zone 2 → at the end, 4x20 sec strides (controlled acceleration to about 85% effort, not a sprint — think smooth and quick, not hard) with 60 sec walk recovery between each. Strides wake up your fast-twitch muscle and keep the legs sharp on cutback weeks without adding fatigue.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT + MOBILITY</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 4 MI</span><span class="day-notes">Zone 2. Short and easy. Let the legs rest before Saturday.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 9 MI</span><span class="day-notes">Cutback long run — pull back from 12 mi last week. Relaxed Zone 2, HR 136–151. No gel needed until mile 6 if even. You should finish feeling like you had more in the tank.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
     </div>
   </div>
 
-  <!-- Week 12 — Build -->
+  <!-- Week 12 -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
       <span class="week-label">WEEK 12 — BUILD</span>
@@ -1246,17 +1219,17 @@
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-07-13"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-07-14" data-strength-day="true"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-07-15"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-intervals">ROLLING 800S — 5 MI</span><span class="day-notes">Easy aerobic run with periodic 800m surges at threshold/5K effort, jog recovery between. Total 5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-07-16"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-07-17"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-07-18"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">HILLY PROGRESSIVE LONG RUN — 10 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Start easy on rolling terrain, build effort gradually through the run.</span></div></div>
-      <div class="day-row" data-date="2026-07-19"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2, HR 136–151. Coming out of cutback — legs should feel fresher than last week.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">CRUISE INTERVALS — 7 MI TOTAL</span><span class="day-notes">1.5 mi easy warm-up → 4x1 mile at marathon goal pace effort (HR 151–160, ~10:00–10:15/mi — this is your target race pace, not all-out, should feel "controlled hard") with 90 sec easy jog recovery → 1.5 mi easy cool-down. The goal here is to get comfortable running at the exact pace you'll hold for 26.2 miles. If your HR is over 160 during the reps, slow down — don't chase pace at the expense of HR.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT + MOBILITY</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2. Nice and easy — protect the legs for Saturday's long run.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 12 MI</span><span class="day-notes">Zone 2. HR 136–151. ~10:30–11:00/mi. Gel at miles 4 and 8. Back up to 12 after the cutback — should feel manageable.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
     </div>
   </div>
 
-  <!-- Week 13 — Build -->
+  <!-- Week 13 -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
       <span class="week-label">WEEK 13 — BUILD</span>
@@ -1264,285 +1237,268 @@
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-07-20"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-07-21"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-intervals">BROKEN MILES — 5.5 MI</span><span class="day-notes">Mile repeats broken into shorter segments with brief recoveries, at threshold/5K effort. Total 5.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-07-22" data-strength-day="true"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-07-23"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-tempo">TEMPO 2-1 — 5.5 MI</span><span class="day-notes">2 mi at tempo effort, 1 mi easy, repeat structure. Total 5.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-07-24"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-07-25"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">LONG RUN — 11 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Easy effort throughout, per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-07-26"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2, HR 136–151. Honest easy pace — if the long run left you sore, take this extra slow.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">MARATHON PACE RUN — 8 MI TOTAL</span><span class="day-notes">2 mi easy warm-up → 4 mi at marathon goal pace (HR 151–160, ~10:00–10:15/mi) → 2 mi easy cool-down. This is the most important workout type for marathon training — you're teaching your body to run efficiently at race pace. The 4 mi at pace should feel controlled, not labored. If it feels too hard at mile 3, slow down 15 sec/mi and reassess. Negative split it: first 2 MP miles slightly more conservative, last 2 a touch stronger.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT + MOBILITY</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2. Keep it easy — big long run Saturday.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 14 MI</span><span class="day-notes">Zone 2. HR 136–151. ~10:30–11:00/mi. Gel at miles 4, 8, and 12. First time in double digits above 12 — start very easy, the last 4 miles will tell you where you are. If HR drifts over 151 in miles 11–14, that's fine — just don't force pace.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
     </div>
   </div>
 
-  <!-- Week 14 — Build -->
+  <!-- Week 14 — Cutback -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 14 — BUILD</span>
+      <span class="week-label">WEEK 14 — CUTBACK ⬇️</span>
       <span class="week-dates">Jul 27 – Aug 2</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-07-27"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-07-28" data-strength-day="true"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-07-29"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-tempo">TEMPO 1200S — 5 MI</span><span class="day-notes">1200m repeats at tempo/threshold effort with short jog recoveries. Total 5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-07-30"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-07-31"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-08-01"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">BLOCK LONG RUN — 12 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Easy effort throughout, per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-08-02"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 4 MI</span><span class="day-notes">Zone 2. Cutback week — your body needs this after 3 weeks of building. Don't try to sneak in extra miles.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">FARTLEK — 5 MI TOTAL</span><span class="day-notes">4 mi easy with 6x1 min pickups scattered throughout. After 5–10 min warm-up, every ~5 min do a 1 min surge to tempo effort (HR 155–165) then settle back to easy Zone 2. These aren't all-out — just a controlled push to keep the aerobic system sharp on a cutback week without accumulating fatigue. Run by feel, not GPS pace.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT + MOBILITY</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 4 MI</span><span class="day-notes">Zone 2. Short and easy. August heat is coming — hydrate well.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 10 MI</span><span class="day-notes">Cutback long run. Relaxed Zone 2, HR 136–151. Pull back from 14 mi — this should feel like a recovery run compared to last week. Gel at mile 6 only.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
     </div>
   </div>
 
-  <!-- Week 15 — Percy Sutton Harlem 5K -->
+  <!-- Week 15 -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 15 — PERCY SUTTON HARLEM 5K</span>
+      <span class="week-label">WEEK 15 — BUILD</span>
       <span class="week-dates">Aug 3 – Aug 9</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-08-03"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-long">LONG RUN — 6.5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Long run shifted to Monday this week. Easy effort throughout.</span></div></div>
-      <div class="day-row" data-date="2026-08-04" data-strength-day="true"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-08-05"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-intervals">TAPER 400S — 3.5 MI</span><span class="day-notes">Short, sharp 400m repeats at race-effort to keep legs fresh and snappy before Saturday. Total 3.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-08-06"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-08-07"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Off legs entirely before tomorrow's race.</span></div></div>
-      <div class="day-row" data-date="2026-08-08" data-race-day="true"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-race">🏅 RACE DAY — 9.1 MI</span><span class="day-notes">Percy Sutton Harlem 5K — race the 5K ALL OUT.</span></div></div>
-      <div class="race-breakdown"><span><strong>🏅 Percy Sutton Harlem 5K — Aug 8, 2026</strong><br>3 mi easy warmup → 3.1 mi race ALL OUT → 3 mi easy cooldown</span></div>
-      <div class="day-row" data-date="2026-08-09"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2, HR 136–151. Start this week fresh from the cutback. August heat — run early morning if possible, before 8am.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">TEMPO RUN — 7 MI TOTAL</span><span class="day-notes">1.5 mi easy warm-up → 4 mi continuous tempo (HR 151–165, ~9:30–10:00/mi, comfortably hard — this is harder than marathon pace but not all-out) → 1.5 mi easy cool-down. The 4 mi continuous tempo is a step up from broken intervals — you're building the mental and physical ability to hold discomfort for longer. First mile of tempo will feel fine; mile 3 is where it gets honest. Stay steady, don't surge.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT + MOBILITY</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2. Easy recovery run. Heat adjustment — slow down by 30–45 sec/mi in summer temps if needed to stay in Z2.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 12 MI</span><span class="day-notes">Zone 2. HR 136–151. Start before 7am — heat will make miles 8–12 brutal otherwise. Gel at miles 4 and 8. Carry water or plan a fountain route. Next week is Harlem 5K so this is your last real long run before that race.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
     </div>
   </div>
 
-  <!-- Week 16 — TCS NYC Marathon Training Series 12M -->
+  <!-- Week 16 — Harlem 5K -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 16 — TCS NYC MARATHON TRAINING SERIES 12M</span>
+      <span class="week-label" style="color:var(--race);">📍 WEEK 16 — HARLEM 5K</span>
       <span class="week-dates">Aug 10 – Aug 16</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-08-10"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-08-11" data-strength-day="true"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-08-12"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-tempo">TEMPO 2 MILES — 3.2 MI</span><span class="day-notes">Warmup, 2 miles at tempo effort, cooldown. Total 3.2 mi.</span></div></div>
-      <div class="day-row" data-date="2026-08-13"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 3.75 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-08-14"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-08-15" data-race-day="true"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-race">🏅 RACE DAY — 12.5 MI</span><span class="day-notes">TCS NYC Marathon Training Series 12M — supported long run, NOT all out.</span></div></div>
-      <div class="race-breakdown"><span><strong>🏅 TCS NYC Marathon Training Series 12M — Aug 15, 2026</strong><br>0.5 mi easy warmup → 12 mi at strong-and-steady effort with marathon-pace segments (NOT all out — treat as a supported long run)</span></div>
-      <div class="day-row" data-date="2026-08-16"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 4 MI</span><span class="day-notes">Zone 2. Race week — keep all easy runs genuinely easy. No extra effort.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">RACE PREP INTERVALS — 5 MI TOTAL</span><span class="day-notes">1.5 mi easy warm-up → 4x400m (quarter mile) at 5K race effort (fast but controlled, HR 170–180) with 90 sec walk/jog recovery → 1.5 mi easy cool-down. Short and sharp — these wake up your legs and recruit fast-twitch muscle before Saturday's race without accumulating fatigue. Don't overdo it. You should feel snappy, not tired, after.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT + MOBILITY</span><span class="day-notes">Keep lower body light this week.</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 3 MI</span><span class="day-notes">Zone 2. Short shakeout — just keep the legs moving. Off feet by afternoon.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST / SHAKEOUT</span><span class="day-notes">Light 15–20 min if needed. Off legs by afternoon.</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-race">🏅 HARLEM 5K</span><span class="day-notes">NYRR 9+1 Race #6. Race + ~7 mi extension south → stop at 96th St, subway home. Total ~10 mi.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Full rest. Long run covered yesterday.</span></div></div>
     </div>
   </div>
+  <div class="race-note-box"><strong>Training Context — Harlem 5K (Aug 8)</strong>Race finishes at St. Nicholas Park. Target ~10 miles total — run ~7 miles of extension south then stop around 96th St and subway home. Bring 2 gels, start early, August heat is real.</div>
 
-  <!-- Week 17 — Grete's Great Gallop 10K -->
-  <div class="week">
+  <!-- Week 17 — TCS 12 Miler -->
+  <div class="week" style="margin-top:16px;">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 17 — GRETE'S GREAT GALLOP 10K</span>
+      <span class="week-label" style="color:var(--race);">📍 WEEK 17 — TCS 12 MILER</span>
       <span class="week-dates">Aug 17 – Aug 23</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-08-17" data-strength-day="true"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks. Strength moved to Monday this week since the long run is Wednesday.</span></div></div>
-      <div class="day-row" data-date="2026-08-18"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-08-19"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-long">RACE PRACTICE LONG RUN — 12 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Long run moved from Monday to Wednesday for recovery after last week's 12M.</span></div></div>
-      <div class="day-row" data-date="2026-08-20"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 5.5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-08-21"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Off legs entirely before tomorrow's race.</span></div></div>
-      <div class="day-row" data-date="2026-08-22" data-race-day="true"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-race">🏅 RACE DAY — 8.7 MI</span><span class="day-notes">NYRR Grete's Great Gallop 10K — strong, honest effort (not all out).</span></div></div>
-      <div class="race-breakdown"><span><strong>🏅 NYRR Grete's Great Gallop 10K — Aug 22, 2026</strong><br>1.5 mi easy warmup → 6.2 mi race at strong honest effort (not all out) → 1 mi easy cooldown</span></div>
-      <div class="day-row" data-date="2026-08-23"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-recovery">RECOVERY 3 MI</span><span class="day-notes">Very easy jog or walk. You raced + ran ~10 mi Saturday. Legs need flushing, not pushing.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI WITH STRIDES</span><span class="day-notes">4 mi easy Zone 2 → 4x20 sec strides at the end. Race is Saturday — this keeps the legs sharp without adding fatigue. Don't do any hard sustained effort this week.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT + MOBILITY</span><span class="day-notes">Upper body only. No heavy lower body — race Saturday.</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 3 MI</span><span class="day-notes">Zone 2. Short shakeout only. Off feet the rest of the day.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Full rest. Big day tomorrow.</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-race">🏅 TCS MARATHON SERIES 12M</span><span class="day-notes">NYRR 9+1 Race #7. THIS IS YOUR LONG RUN. Run at easy/marathon pace (~10:00–10:30/mi). Gel every 4 miles — treat it exactly like a training run.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Full rest. You earned it.</span></div></div>
     </div>
   </div>
+  <div class="race-note-box"><strong>Training Context — TCS Marathon Series 12M (Aug 15)</strong>Do NOT do a separate long run — this IS it. Run at easy to marathon pace, not race effort. Treat it like a training run with aid stations.</div>
 
-  <div class="notes-box">
-    <h4>Phase 3 Notes</h4>
-    <p>This block runs the new Runna plan from the start: tune-up races (Citizens Queens 10K, Percy Sutton Harlem 5K, TCS NYC Marathon Training Series 12M, Grete's Great Gallop 10K) double as fitness benchmarks and NYRR 9+1 qualifiers. Strength stays at one 30–40 min hip/glute session per week on an easy midweek day — never the day before a long run or race. IT band routine every week regardless of how good you feel.</p>
-  </div>
-</div>
-
-<!-- PHASE 4: PEAK BUILD + TAPER + NYC MARATHON -->
-<div id="phase4" class="phase-content">
-  <div class="phase-header">
-    <div>
-      <div class="phase-title">PHASE 4: PEAK BUILD + TAPER + NYC MARATHON</div>
-      <div class="phase-subtitle">Aug 24 – Nov 1 (10 weeks). Peak mileage block, taper, and race day. Continue the weekly 30–40 min hip/glute strength session through Week 26 — none in race week. Z2 = 136–151bpm for Easy/Long runs.</div>
-    </div>
-    <div class="phase-badge">WEEKS 18–27<br>Aug 24 – Nov 1</div>
-  </div>
-
-  <!-- Week 18 — Peak Build -->
-  <div class="week">
+  <!-- Week 18 — Grete's Great Gallop -->
+  <div class="week" style="margin-top:16px;">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 18 — PEAK BUILD</span>
+      <span class="week-label" style="color:var(--race);">📍 WEEK 18 — GRETE'S GREAT GALLOP 10K</span>
       <span class="week-dates">Aug 24 – Aug 30</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-08-24"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-08-25"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-tempo">TEMPO 3 MILES — 5.5 MI</span><span class="day-notes">Warmup, 3 miles continuous at tempo effort, cooldown. Total 5.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-08-26" data-strength-day="true"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-08-27"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-hills">HILL REPEATS — 5 MI</span><span class="day-notes">Find a moderate hill. Hard effort up, easy jog/walk recovery down. Total session 5 mi including warmup/cooldown.</span></div></div>
-      <div class="day-row" data-date="2026-08-28"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-08-29"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">HILLY LONG RUN — 14 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Easy effort on rolling terrain.</span></div></div>
-      <div class="day-row" data-date="2026-08-30"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-recovery">RECOVERY 3 MI</span><span class="day-notes">Easy 20–30 min. Flush the legs from last week's 12-miler race. Keep HR under 136 if possible.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">MARATHON PACE TUNE-UP — 6 MI TOTAL</span><span class="day-notes">1.5 mi easy warm-up → 3 mi at marathon goal pace (HR 151–160, ~10:00–10:15/mi) → 1.5 mi cool-down. This keeps you sharp and race-ready but doesn't dig into recovery. By now marathon pace should feel familiar — if it feels genuinely easy, good. If it feels hard, make a note and adjust your race-day expectations accordingly.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT + MOBILITY</span><span class="day-notes">Upper body only. No heavy lower body — big race Saturday.</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 3 MI</span><span class="day-notes">Zone 2. Very short — just keeping legs loose before Saturday.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST / SHAKEOUT</span><span class="day-notes">Full rest or 10 min easy walk. Carbs tonight. Early bed.</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-race">🏅 GRETE'S GREAT GALLOP 10K</span><span class="day-notes">NYRR 9+1 Race #8. Race + ~8 mi extension → stop at Atlantic Terminal, subway home. Total ~14 mi. Bring 2–3 gels. Start early — August heat is brutal after 9am.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Full rest. Hardest training weekend of the cycle — protect Sunday completely.</span></div></div>
     </div>
   </div>
+  <div class="race-note-box"><strong>Training Context — Grete's Great Gallop 10K (Aug 22)</strong>Race finishes near 72nd St, Central Park West. Target ~14 miles total — ~8 miles extension then stop at Atlantic Terminal, subway home. Route: south to Columbus Circle → Greenway south → Brooklyn Bridge → DUMBO → Atlantic Terminal.</div>
 
-  <!-- Week 19 — Peak Build -->
+  <div class="notes-box">
+    <h4>Phase 3 Notes</h4>
+    <p>Shift nutrition focus toward performance this phase — no more deficit on run days. You need fuel for quality workouts. Protein stays at 160g minimum. Sleep becomes non-negotiable; long runs suffer badly with less than 7.5 hours. IT band routine every single week regardless of how good you feel.</p>
+  </div>
+</div>
+
+<!-- PHASE 4: MARATHON BUILD -->
+<div id="phase4" class="phase-content">
+  <div class="phase-header">
+    <div>
+      <div class="phase-title">PHASE 4: MARATHON BUILD + TAPER</div>
+      <div class="phase-subtitle">Aug 31 – Nov 2 (~9 weeks). Peak training block then taper. Lifting drops to 1x/week upper body only. Mobility becomes daily. Add workouts each week as they're assigned.</div>
+    </div>
+    <div class="phase-badge">WEEKS 19–27<br>Aug 31 – Nov 2</div>
+  </div>
+
+  <!-- Week 19 -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 19 — PEAK BUILD</span>
+      <span class="week-label">WEEK 19 — BUILD</span>
       <span class="week-dates">Aug 31 – Sep 6</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-08-31"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-09-01"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-intervals">800M REPEATS — 5.5 MI</span><span class="day-notes">Warmup, then 800m repeats at 5K effort with jog recovery, cooldown. Total 5.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-09-02" data-strength-day="true"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-09-03"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-tempo">OVER AND UNDERS 1KM — 5.5 MI</span><span class="day-notes">Alternate 1km segments between "over" (tempo+) and "under" (tempo-) pace. Total 5.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-09-04"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-09-05"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">LONG RUN — 15 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Easy effort throughout, per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-09-06"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2. Phase 4 starts here. Coming off Grete's race week — legs may still be heavy. Slow down as much as needed.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">MARATHON PACE LONG INTERVALS — 9 MI TOTAL</span><span class="day-notes">2 mi easy warm-up → 3x2 miles at marathon goal pace (HR 151–160, ~10:00–10:15/mi) with 2 min easy jog recovery between each → 1 mi easy cool-down. This is the signature Phase 4 workout — you're running 6 total miles at race pace in chunks. The recovery is intentionally short so your body doesn't fully reset. By the 3rd rep you should be working. If the pace feels impossible to hit at HR 151–160, slow the pace — the HR ceiling is more important than the pace target at this stage.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT (UPPER ONLY) + MOBILITY</span><span class="day-notes">No heavy lower body from here on.</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2. Keep it honest — big long run Saturday.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 16 MI</span><span class="day-notes">Zone 2. HR under 151. ~10:30–11:00/mi. Gel at miles 4, 8, and 12. Start before 7am. This is uncharted territory — stay disciplined about pace. Miles 13–16 will tell you everything about your nutrition and pacing. If you blow up, you went out too fast or underfueled.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
     </div>
   </div>
 
-  <!-- Week 20 — Peak Build -->
+  <!-- Week 20 -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 20 — PEAK BUILD</span>
+      <span class="week-label">WEEK 20 — BUILD</span>
       <span class="week-dates">Sep 7 – Sep 13</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-09-07"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-09-08" data-strength-day="true"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-09-09"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-09-10"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-tempo">PROGRESSION RUN — 5.5 MI</span><span class="day-notes">Start easy, finish at tempo effort. Even, controlled build — last mile should be the fastest.</span></div></div>
-      <div class="day-row" data-date="2026-09-11"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-09-12"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">RACE PRACTICE LONG RUN — 16 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Longest run so far. Practice race-day fueling and gear.</span></div></div>
-      <div class="day-row" data-date="2026-09-13"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2. Coming off 16 miles — legs will feel it. Slow down as much as needed to stay in Z2.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">PROGRESSIVE LONG TEMPO — 9 MI TOTAL</span><span class="day-notes">2 mi easy warm-up → 5 mi progressive tempo (start at ~10:15/mi, HR 151–158, then gradually get slightly faster each mile — mile 5 should be your hardest at ~9:45/mi, HR 158–165) → 2 mi easy cool-down. The progressive element is key: don't go out too hot. Each mile should feel slightly harder than the last. This teaches your body to run strong when fatigued, which is exactly what miles 20–26 will demand.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT (UPPER ONLY) + MOBILITY</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2. Biggest long run of the cycle is Saturday — protect Thursday.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Full rest. 18-miler tomorrow and 5th Ave Mile Sunday. Eat well tonight — carbs, protein, hydrate.</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 18 MI</span><span class="day-notes">Zone 2. HR under 151. ~10:30–11:00/mi. Gel at miles 4, 8, 12, and 16. Start before 7am. This is one mile short of your peak — run it conservatively. The goal is to finish feeling tired but not destroyed. If HR drifts in miles 15–18, let it — just don't force the pace.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
     </div>
   </div>
 
-  <!-- Week 21 — NYRR Bronx 10 Mile -->
+  <!-- Week 21 — 5th Ave Mile -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 21 — NYRR BRONX 10 MILE</span>
+      <span class="week-label" style="color:var(--race);">📍 WEEK 21 — 5TH AVE MILE</span>
       <span class="week-dates">Sep 14 – Sep 20</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-09-14"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-09-15" data-strength-day="true"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-09-16"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-tempo">OVER AND UNDERS MILES — 3.8 MI</span><span class="day-notes">Alternate full-mile segments between "over" (tempo+) and "under" (tempo-) pace. Total 3.8 mi.</span></div></div>
-      <div class="day-row" data-date="2026-09-17"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 3.5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-09-18"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Off legs entirely before tomorrow's race.</span></div></div>
-      <div class="day-row" data-date="2026-09-19" data-race-day="true"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-race">🏅 RACE DAY — 12.5 MI</span><span class="day-notes">NYRR Bronx 10 Mile — key marathon fitness benchmark. Race ALL OUT.</span></div></div>
-      <div class="race-breakdown"><span><strong>🏅 NYRR Bronx 10 Mile — Sep 19, 2026</strong><br>1.5 mi easy warmup → 10 mi race ALL OUT (key marathon fitness benchmark — recalibrate Runna's estimated finish time after this) → 1 mi easy cooldown</span></div>
-      <div class="day-row" data-date="2026-09-20"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2. Coming off 18 miles — legs will be sore. Go as slow as needed.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">CONTROLLED INTERVALS — 7 MI TOTAL</span><span class="day-notes">1.5 mi easy warm-up → 5x1 mile at marathon pace (HR 151–160, ~10:00–10:15/mi) with 90 sec jog recovery → 1.5 mi cool-down. Keep it very controlled this week — big weekend ahead (20-miler Sat, race Sun). Do not chase faster splits. The goal is confidence at race pace, not fatigue. If legs feel heavy from Monday, back off to 4 reps.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-lift">LIFT (UPPER ONLY) + MOBILITY</span><span class="day-notes">No heavy lower body this week.</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 4 MI</span><span class="day-notes">Zone 2. Short and easy — saving legs for the weekend.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Full rest. Big 20-miler tomorrow — eat well, hydrate, get to bed early.</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 20 MI</span><span class="day-notes">⚠️ PEAK LONG RUN. Your biggest run of the entire cycle. Run truly easy — ~11:00–11:30/mi, HR under 151. Gel at miles 4, 8, 12, and 16. Race tomorrow so don't push it. Finish feeling like you had 2 more miles in you.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-race">🏅 5TH AVE MILE</span><span class="day-notes">NYRR 9+1 Race #9. Legs will be tired — just jog it in. This is a checkbox, not a race effort. Enjoy it.</span></div></div>
     </div>
   </div>
+  <div class="race-note-box"><strong>Training Context — 5th Ave Mile (Sep 14)</strong>Your peak 20-miler is the day before — don't race the mile, just jog it comfortably. This is purely a 9+1 checkbox. The 20-miler Saturday is the real workout of the weekend.</div>
 
-  <!-- Week 22 — Peak Mileage -->
-  <div class="week">
+  <!-- Week 22 — Bronx 10 Mile -->
+  <div class="week" style="margin-top:16px;">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 22 — PEAK MILEAGE</span>
+      <span class="week-label" style="color:var(--race);">📍 WEEK 22 — BRONX 10 MILE</span>
       <span class="week-dates">Sep 21 – Sep 27</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-09-21"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 7 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-09-22"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-tempo">TEMPO 2-1 — 5.5 MI</span><span class="day-notes">2 mi at tempo effort, 1 mi easy, repeat structure. Total 5.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-09-23" data-strength-day="true"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-09-24"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-intervals">1KM REPEATS — 5.1 MI</span><span class="day-notes">Warmup, then 1km repeats at 5K/10K effort with jog recovery, cooldown. Total 5.1 mi.</span></div></div>
-      <div class="day-row" data-date="2026-09-25"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-09-26"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">LONG RUN — 17 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Easy effort throughout, per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-09-27"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-recovery">RECOVERY RUN / WALK</span><span class="day-notes">Very easy. You ran 20+ miles last week. Protect your legs.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">EASY RUN</span><span class="day-notes">Easy only — no hard efforts this week with Bronx 10 on Saturday.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-recovery">MOBILITY + CORE ONLY</span><span class="day-notes">No lifting this week. Legs need to be recovered for Saturday.</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Full rest or 15 min easy shakeout. Off legs by midday.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Full rest. Big race tomorrow — stay off your feet.</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-race">🏅 BRONX 10 MILE</span><span class="day-notes">NYRR 9+1 Race #10. Run at marathon effort or slightly faster — this IS your long run. Gel at miles 3 and 6–7.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-run">EASY 6–8 MI</span><span class="day-notes">Easy shake-out miles only. Last big week before taper begins.</span></div></div>
     </div>
   </div>
+  <div class="race-note-box"><strong>Training Context — Bronx 10 Mile (Sep 20)</strong>Last major race before taper. Coming off your peak 20-miler the previous week, the Bronx 10 counts as your long run — no separate long run needed. Run controlled at marathon effort and practice fueling. Final fitness barometer before November 2nd. After this, taper begins.</div>
 
-  <!-- Week 23 — Peak Mileage -->
-  <div class="week">
+  <!-- Week 23 — Taper begins -->
+  <div class="week" style="margin-top:16px;">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 23 — PEAK MILEAGE</span>
+      <span class="week-label">WEEK 23 — TAPER BEGINS</span>
       <span class="week-dates">Sep 28 – Oct 4</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-09-28"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-09-29"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-hills">DROP SET HILL REPS — 6.6 MI</span><span class="day-notes">Hill repeats with decreasing recovery between reps ("drop sets"). Total session 6.6 mi including warmup/cooldown.</span></div></div>
-      <div class="day-row" data-date="2026-09-30" data-strength-day="true"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-10-01"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-tempo">TEMPO 2 MILES — 4 MI</span><span class="day-notes">Warmup, 2 miles at tempo effort, cooldown. Total 4 mi.</span></div></div>
-      <div class="day-row" data-date="2026-10-02"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-10-03"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">HILLY LONG RUN — 19 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Easy effort on rolling terrain. Practice fueling.</span></div></div>
-      <div class="day-row" data-date="2026-10-04"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 5 MI</span><span class="day-notes">Zone 2. Taper madness may start here — you'll feel sluggish, heavy, anxious. That's normal. Trust the process.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">TEMPO TUNE-UP — 6 MI TOTAL</span><span class="day-notes">1.5 mi easy warm-up → 3 mi at marathon goal pace (HR 151–160, ~10:00–10:15/mi) → 1.5 mi easy cool-down. Taper key workouts get shorter but not easier in effort. This keeps your neuromuscular system sharp. Should feel controlled and crisp — not a grind. If it feels great, resist the urge to do more.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-recovery">MOBILITY + CORE</span><span class="day-notes">No lifting in taper. 20–30 min full mobility session — IT band, hip flexors, calves.</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 4 MI</span><span class="day-notes">Zone 2. Short and easy. The reduced mileage will feel strange — that's by design.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 13 MI</span><span class="day-notes">Taper — last real long run. Zone 2, no pressure. ~10:30–11:00/mi. Gel at miles 5 and 10. You should finish feeling like you had plenty left. If you feel incredible, don't chase it — this run's job is to top off your aerobic engine, not drain it.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
     </div>
   </div>
 
-  <!-- Week 24 — Peak Mileage (Longest Run) -->
+  <!-- Week 24 -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 24 — PEAK MILEAGE (LONGEST RUN)</span>
+      <span class="week-label">WEEK 24 — TAPER</span>
       <span class="week-dates">Oct 5 – Oct 11</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-10-05"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6.5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-10-06" data-strength-day="true"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-10-07"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-tempo">TEMPO 2.5 MILES — 5.5 MI</span><span class="day-notes">Warmup, 2.5 miles continuous at tempo effort, cooldown. Total 5.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-10-08"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-10-09"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-10-10"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">HILLY PROGRESSIVE REPEAT LONG RUN — 21 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Longest run of the cycle. Start easy on rolling terrain, build effort through repeated progressions. Practice race-day fueling and gear.</span></div></div>
-      <div class="day-row" data-date="2026-10-11"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 4 MI</span><span class="day-notes">Zone 2. Your legs are banking fitness — even easy running feels like work in taper. That's fine.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">STRIDES + EASY — 5 MI TOTAL</span><span class="day-notes">4 mi easy Zone 2 → 6x20 sec strides at the end (smooth acceleration to ~85% effort, not a sprint — think quick turnover, not hard effort) with 60 sec walk recovery. Strides keep your neuromuscular system firing during taper without adding fatigue. Your legs should feel crisp after, not tired.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-recovery">MOBILITY + CORE</span><span class="day-notes">20–30 min full mobility. IT band routine. This matters more than ever in taper.</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 4 MI</span><span class="day-notes">Zone 2. Keep it honest and short.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 10 MI</span><span class="day-notes">Taper long run. Zone 2, HR 136–151. ~10:30–11:00/mi. Should feel noticeably easier than the 13-miler last week — your body is absorbing everything. No gel needed until mile 7.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
     </div>
   </div>
 
-  <!-- Week 25 — Taper Begins -->
+  <!-- Week 25 -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 25 — TAPER BEGINS</span>
+      <span class="week-label">WEEK 25 — TAPER</span>
       <span class="week-dates">Oct 12 – Oct 18</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-10-12"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6.5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-10-13"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-intervals">ROLLING 800S — 5.5 MI</span><span class="day-notes">Easy aerobic run with periodic 800m surges at threshold/5K effort, jog recovery between. Total 5.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-10-14" data-strength-day="true"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks.</span></div></div>
-      <div class="day-row" data-date="2026-10-15"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-intervals">BROKEN MILES — 5.5 MI</span><span class="day-notes">Mile repeats broken into shorter segments with brief recoveries, at threshold/5K effort. Total 5.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-10-16"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-10-17"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">LONG RUN — 14 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Taper begins — pulling back from last week's 21 mi. Easy effort throughout.</span></div></div>
-      <div class="day-row" data-date="2026-10-18"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-run">EASY 3 MI</span><span class="day-notes">Zone 2. Two weeks out. Mileage drops significantly — this is intentional and correct.</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-run">RACE PACE SHARPENER — 5 MI TOTAL</span><span class="day-notes">1 mi easy warm-up → 2 mi at marathon goal pace (HR 151–160, ~10:00–10:15/mi) → 1 mi easy → 2x30 sec strides → 1 mi easy cool-down. Last key workout before race week. Keep it short and sharp. Race pace should feel natural and controlled by now — if it feels hard, you're probably fatigued from taper anxiety and not actually losing fitness.</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-recovery">MOBILITY + CORE</span><span class="day-notes">Full mobility session. Sleep and nutrition are your training tools now.</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">EASY 3 MI</span><span class="day-notes">Zone 2. Short shakeout.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-run">LONG RUN 7 MI</span><span class="day-notes">Final pre-race long run. Zone 2, no pressure. Legs should feel fresh and springy. Carry a gel but you probably won't need it. Last 2 miles: let it feel natural. Don't force anything.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
     </div>
   </div>
 
-  <!-- Week 26 — Taper -->
+  <!-- Week 26 — Race Week -->
   <div class="week">
     <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 26 — TAPER</span>
+      <span class="week-label">WEEK 26 — RACE WEEK PREP</span>
       <span class="week-dates">Oct 19 – Oct 25</span>
       <span class="week-toggle">▾</span>
     </div>
     <div class="week-body">
-      <div class="day-row" data-date="2026-10-19"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 6.5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-10-20" data-strength-day="true"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-strength">STRENGTH</span><span class="day-notes">30–40 min hip/glute focus: clamshells, lateral band walks, single-leg glute bridges, Bulgarian split squats, banded monster walks. Last strength session before race week.</span></div></div>
-      <div class="day-row" data-date="2026-10-21"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-tempo">STEADY INTO TEMPO — 4.5 MI</span><span class="day-notes">Build from steady aerobic effort into tempo effort over the course of the run. Total 4.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-10-22"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 5.5 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Conversational pace per Runna's pace cap.</span></div></div>
-      <div class="day-row" data-date="2026-10-23"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-10-24"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-long">RACE PRACTICE LONG RUN — 9 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Taper continues. Final dress rehearsal — practice race-day kit, fueling, and warmup routine.</span></div></div>
-      <div class="day-row" data-date="2026-10-25"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-    </div>
-  </div>
-
-  <!-- Week 27 — Race Week: NYC Marathon -->
-  <div class="week">
-    <div class="week-header" onclick="toggleWeek(this)">
-      <span class="week-label">WEEK 27 — RACE WEEK 🏆 NYC MARATHON</span>
-      <span class="week-dates">Oct 26 – Nov 1</span>
-      <span class="week-toggle">▾</span>
-    </div>
-    <div class="week-body">
-      <div class="day-row" data-date="2026-10-26"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Race week — no strength session this week.</span></div></div>
-      <div class="day-row" data-date="2026-10-27"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-intervals">RACE PACE MILE REPS — 4.5 MI</span><span class="day-notes">Short reps at goal marathon pace (9:00–9:25/mi) to lock in race-day rhythm. Total 4.5 mi.</span></div></div>
-      <div class="day-row" data-date="2026-10-28"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-10-29"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-easy">EASY RUN — 4 MI</span><span class="day-notes"><span class="z2-tag">Z2 · 136–151bpm</span>Short and easy — shake the legs out.</span></div></div>
-      <div class="day-row" data-date="2026-10-30"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span></div></div>
-      <div class="day-row" data-date="2026-10-31"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Carb-load, hydrate, lay out race kit. Off your feet.</span></div></div>
-      <div class="day-row" data-date="2026-11-01" data-race-day="true"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-race">🏆 NYC MARATHON — 26.2 MI</span><span class="day-notes">RACE DAY. Nov 1, 2026. Runna predicted finish 3:56–4:07, target race pace 9:00–9:25/mi. You've done the work — trust it.</span></div></div>
+      <div class="day-row"><div class="day-name">Mon</div><div class="day-content"><span class="activity-tag tag-easy">EASY 20–25 MIN</span></div></div>
+      <div class="day-row"><div class="day-name">Tue</div><div class="day-content"><span class="activity-tag tag-easy">EASY 20–25 MIN</span></div></div>
+      <div class="day-row"><div class="day-name">Wed</div><div class="day-content"><span class="activity-tag tag-run">~4 MI SHAKEOUT</span><span class="day-notes">Race week — keep everything short and easy. No stress on the legs.</span></div></div>
+      <div class="day-row"><div class="day-name">Thu</div><div class="day-content"><span class="activity-tag tag-run">15 MIN + STRIDES</span><span class="day-notes">15 min easy with 4x20 sec strides. Keep it loose.</span></div></div>
+      <div class="day-row"><div class="day-name">Fri</div><div class="day-content"><span class="activity-tag tag-rest">REST</span><span class="day-notes">Complete rest. Stay off your feet. Eat well, hydrate, sleep early.</span></div></div>
+      <div class="day-row"><div class="day-name">Sat</div><div class="day-content"><span class="activity-tag tag-easy">10 MIN SHAKEOUT</span><span class="day-notes">10 min easy jog only. Off your feet all day after. Carbs, sleep.</span></div></div>
+      <div class="day-row"><div class="day-name">Sun</div><div class="day-content"><span class="activity-tag tag-race">🏆 NYC MARATHON</span><span class="day-notes">RACE DAY. Nov 2, 2026. 26.2 miles. You've done the work — trust it.</span></div></div>
     </div>
   </div>
 
@@ -1868,7 +1824,7 @@
         <td>Citizens Queens 10K</td>
         <td>Jun 20</td>
         <td>6.2 mi</td>
-        <td>Phase 3 — Runna Wk 8</td>
+        <td>Phase 3 — Runna Base Wk 8</td>
         <td>➕ Run warm-up to start / cool-down home to cover 7–8 mi total</td>
         <td><span class="race-status">Upcoming</span></td>
       </tr>
@@ -1877,8 +1833,8 @@
         <td>Harlem 5K</td>
         <td>Aug 8</td>
         <td>3.1 mi</td>
-        <td>Phase 3 — Runna Wk 15</td>
-        <td>✅ ~9 mi total — race + extension to 96th St, subway home</td>
+        <td>Phase 3 — Runna Base Wk 16</td>
+        <td>✅ ~10 mi total — race + extension to 96th St, subway home</td>
         <td><span class="race-status">Upcoming</span></td>
       </tr>
       <tr data-race="7" onclick="toggleRace(this)" style="cursor:pointer;">
@@ -1886,7 +1842,7 @@
         <td>TCS Marathon Series 12M</td>
         <td>Aug 15</td>
         <td>12 mi</td>
-        <td>Phase 3 — Runna Wk 16</td>
+        <td>Phase 3 — Runna Base Wk 17</td>
         <td>✅ This IS your long run</td>
         <td><span class="race-status">Upcoming</span></td>
       </tr>
@@ -1895,8 +1851,8 @@
         <td>Grete's Great Gallop 10K</td>
         <td>Aug 22</td>
         <td>6.2 mi</td>
-        <td>Phase 3 — Runna Wk 17</td>
-        <td>✅ ~9 mi total — race + extension, subway home from Atlantic Terminal</td>
+        <td>Phase 3 — Runna Base Wk 18</td>
+        <td>✅ ~14 mi total — race + extension, subway home from Atlantic Terminal</td>
         <td><span class="race-status">Upcoming</span></td>
       </tr>
       <tr data-race="9" onclick="toggleRace(this)" style="cursor:pointer;">
@@ -1904,8 +1860,8 @@
         <td>5th Ave Mile</td>
         <td>Sep 13</td>
         <td>1 mi</td>
-        <td>Phase 4 — Runna Wk 20</td>
-        <td>16 mi Sat long run → easy jog Sun race</td>
+        <td>Phase 4 — Marathon Build Wk 21</td>
+        <td>20 mi Sat long run → easy jog Sun race</td>
         <td><span class="race-status">Upcoming</span></td>
       </tr>
       <tr data-race="10" onclick="toggleRace(this)" style="cursor:pointer;">
@@ -1913,7 +1869,7 @@
         <td>Bronx 10 Mile</td>
         <td>Sep 19</td>
         <td>10 mi</td>
-        <td>Phase 4 — Runna Wk 21</td>
+        <td>Phase 4 — Marathon Build Wk 22</td>
         <td>✅ This IS your long run for the week</td>
         <td><span class="race-status">Upcoming</span></td>
       </tr>
@@ -2624,16 +2580,10 @@
   function tlRender() {
     const stravaWeekly = (() => { try { return JSON.parse(localStorage.getItem('strava_weekly') || '{}'); } catch(e) { return {}; } })();
     const stravaRuns = (() => { try { return JSON.parse(localStorage.getItem('strava_runs') || '[]'); } catch(e) { return []; } })();
-    const runnaRuns = (() => { try { return JSON.parse(localStorage.getItem('runna_runs') || '[]'); } catch(e) { return []; } })();
-    const allRuns = stravaRuns.concat(runnaRuns);
     const merged = {};
     Object.entries(stravaWeekly).forEach(([wk, data]) => {
       const mi = typeof data === 'object' ? data.miles : data;
       if (mi > 0) merged[wk] = { miles: mi, fromStrava: true };
-    });
-    runnaRuns.forEach(r => {
-      if (!merged[r.weekKey]) merged[r.weekKey] = { miles: 0, fromStrava: false };
-      merged[r.weekKey].miles = Math.round((merged[r.weekKey].miles + r.miles) * 100) / 100;
     });
     const data = Object.entries(merged).map(([week, d]) => ({ week, miles: d.miles, fromStrava: d.fromStrava }))
       .sort((a, b) => {
@@ -2675,9 +2625,9 @@
     }).join('');
 
     // Run details with HR
-    if (detailEl && allRuns.length) {
+    if (detailEl && stravaRuns.length) {
       const runsByWeek = {};
-      allRuns.forEach(r => {
+      stravaRuns.forEach(r => {
         if (!runsByWeek[r.weekKey]) runsByWeek[r.weekKey] = [];
         runsByWeek[r.weekKey].push(r);
       });
@@ -2949,129 +2899,6 @@
     setTimeout(() => stravaSync(), 1500);
   }
 
-  // ── RUNNA LIVE SYNC ──
-  const RUNNA_TAG_CLASS = {
-    easy: 'tag-easy', long: 'tag-long', intervals: 'tag-intervals',
-    tempo: 'tag-tempo', hills: 'tag-hills', race: 'tag-race',
-    rest: 'tag-rest', strength: 'tag-strength'
-  };
-
-  function runnaEscapeHtml(s) {
-    const div = document.createElement('div');
-    div.textContent = s || '';
-    return div.innerHTML;
-  }
-
-  function runnaLabelText(ev) {
-    let label = (ev.title || ev.type || 'WORKOUT').toUpperCase();
-    if (ev.distance && !/\d/.test(label)) {
-      const unit = (ev.distanceUnit || 'mi').toUpperCase();
-      label += ` — ${ev.distance}${unit === 'KM' ? 'KM' : 'MI'}`;
-    }
-    return label;
-  }
-
-  function runnaRunToLogFormat(ev) {
-    const date = new Date(ev.date + 'T00:00:00');
-    const TRAINING_START = new Date('2026-04-27T00:00:00');
-    const daysSinceStart = Math.floor((date - TRAINING_START) / (1000*60*60*24));
-    const weekNum = Math.floor(daysSinceStart / 7) + 1;
-    let miles = ev.distance || 0;
-    if (ev.distanceUnit === 'km') miles = miles * 0.621371;
-    miles = Math.round(miles * 100) / 100;
-    let movingTime = null;
-    if (ev.duration) {
-      const parts = ev.duration.split(':').map(Number);
-      movingTime = parts.length === 3 ? parts[0]*3600 + parts[1]*60 + parts[2] : parts[0]*60 + parts[1];
-    }
-    return {
-      id: ev.uid, name: ev.title || 'Runna Run', date: ev.date,
-      dayOfWeek: date.getDay(), weekKey: 'Wk ' + weekNum, weekNum,
-      miles, movingTime, pace: ev.pace || '—', avgHR: null, maxHR: null,
-      zone: null, zoneColor: '#9a9a9a', isLongRun: miles >= 10,
-      elevationGain: 0, fromRunna: true
-    };
-  }
-
-  function appendRunnaActual(row, text) {
-    let notesEl = row.querySelector('.day-notes');
-    if (!notesEl) {
-      notesEl = document.createElement('span');
-      notesEl.className = 'day-notes';
-      row.querySelector('.day-content').appendChild(notesEl);
-    }
-    if (notesEl.querySelector('.runna-actual')) return;
-    const span = document.createElement('span');
-    span.className = 'runna-actual';
-    span.textContent = text;
-    notesEl.appendChild(span);
-  }
-
-  function applyRunnaPlanned(planned) {
-    planned.forEach(ev => {
-      if (!ev.date) return;
-      const row = document.querySelector(`.day-row[data-date="${ev.date}"]`);
-      if (!row) return;
-      const tagEl = row.querySelector('.activity-tag');
-      if (!tagEl) return;
-
-      // Race days and strength days are hand-authored — preserve them as-is.
-      if (row.dataset.raceDay === 'true' || row.dataset.strengthDay === 'true') {
-        return;
-      }
-
-      const notesEl = row.querySelector('.day-notes');
-      tagEl.className = 'activity-tag ' + (RUNNA_TAG_CLASS[ev.tag] || 'tag-rest');
-      tagEl.textContent = runnaLabelText(ev);
-
-      if (notesEl) {
-        let html = '';
-        if (ev.z2) html += '<span class="z2-tag">Z2 · 136–151bpm</span>';
-        html += runnaEscapeHtml(ev.description || ev.title || '').replace(/\n/g, '<br>');
-        notesEl.innerHTML = html;
-      } else if (ev.description) {
-        const span = document.createElement('span');
-        span.className = 'day-notes';
-        let html = '';
-        if (ev.z2) html += '<span class="z2-tag">Z2 · 136–151bpm</span>';
-        html += runnaEscapeHtml(ev.description).replace(/\n/g, '<br>');
-        span.innerHTML = html;
-        row.querySelector('.day-content').appendChild(span);
-      }
-    });
-  }
-
-  function applyRunnaCompleted(completed) {
-    completed.forEach(ev => {
-      if (!ev.date) return;
-      const row = document.querySelector(`.day-row[data-date="${ev.date}"]`);
-      if (row) {
-        row.classList.add('completed');
-        const parts = [];
-        if (ev.distance) parts.push(`${ev.distance}${ev.distanceUnit || 'mi'}`);
-        if (ev.duration) parts.push(ev.duration);
-        if (ev.pace) parts.push(`${ev.pace}/${ev.paceUnit || 'mi'}`);
-        appendRunnaActual(row, parts.length ? `✓ ${parts.join(' · ')}` : '✓ Done');
-      }
-    });
-
-    try {
-      localStorage.setItem('runna_runs', JSON.stringify(completed.map(runnaRunToLogFormat)));
-    } catch(e) {}
-  }
-
-  async function syncRunna() {
-    try {
-      const res = await fetch('/sync/runna');
-      if (!res.ok) return;
-      const data = await res.json();
-      if (data.planned) applyRunnaPlanned(data.planned);
-      if (data.completed) applyRunnaCompleted(data.completed);
-      tlRender();
-      homeInit();
-    } catch(e) {}
-  }
-
   // ── RACE TIME PREDICTOR ──
   function riegelPredict(knownDist, knownTimeSecs, targetDist) {
     return knownTimeSecs * Math.pow(targetDist / knownDist, 1.06);
@@ -3211,7 +3038,6 @@
     renderCourse();
     calRender();
     stravaLoadSaved();
-    syncRunna();
     initSwapFeature();
     applyAllSavedSwaps();
     rdyInit();
