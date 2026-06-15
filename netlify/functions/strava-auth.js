@@ -1,7 +1,7 @@
 ﻿exports.handler = async (event) => {
   const CLIENT_ID = process.env.STRAVA_CLIENT_ID;
   const CLIENT_SECRET = process.env.STRAVA_CLIENT_SECRET;
-  const REDIRECT_URI = 'https://sams-marathon-plan.netlify.app/.netlify/functions/strava-auth';
+  const REDIRECT_URI = 'https://sams-apps.netlify.app/.netlify/functions/strava-auth';
   const { code } = event.queryStringParameters || {};
   if (!code) {
     const authUrl = `https://www.strava.com/oauth/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&approval_prompt=force&scope=activity:read_all`;
