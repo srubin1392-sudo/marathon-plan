@@ -3056,7 +3056,9 @@
     });
 
     try {
-      localStorage.setItem('runna_runs', JSON.stringify(completed.map(runnaRunToLogFormat)));
+      const TRAINING_START = '2026-04-27';
+      const trainingRuns = completed.filter(ev => ev.date >= TRAINING_START).map(runnaRunToLogFormat);
+      localStorage.setItem('runna_runs', JSON.stringify(trainingRuns));
     } catch(e) {}
   }
 
